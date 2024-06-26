@@ -1,0 +1,6 @@
+@noberto.mealControl.WebAPI_HostAddress = http://localhost:5053
+
+GET {{noberto.mealControl.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
