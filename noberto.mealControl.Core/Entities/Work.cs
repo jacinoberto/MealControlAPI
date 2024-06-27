@@ -14,7 +14,7 @@ public class Work : Identifier
 
     public Administrator Administrator { get; set; }
     public Address Address { get; set; }
-    public IEnumerable<TeamManagement> TeamManagemants { get; set; }
+    public IEnumerable<TeamManagement> TeamManagemant { get; set; }
     public IEnumerable<ScheduleLocalEvent> ScheduleLocalEvents { get; set; }
 
     public Work(string identification, DateOnly startDate)

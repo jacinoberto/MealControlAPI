@@ -8,8 +8,10 @@ public class TeamManagement : Identifier
     public string Sector { get; private set; }
     public bool ActiveTeam { get; private set; }
 
+    public Guid AdministratorId { get; set; }
     public Guid ManagerId { get; set; }
     public Guid WorkId { get; set; }
+    public Administrator Administrator { get; set; }
     public Manager Manager { get; set; }
     public Work Work { get; set; }
     public IEnumerable<Team> Teams { get; set; }

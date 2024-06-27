@@ -8,13 +8,28 @@ public class Manager : Identifier
 
     public Guid AddressId { get; set; }
     public Address Address { get; set; }
-    public IEnumerable<TeamManagement> TeamManagements { get; set; }
+    public IEnumerable<TeamManagement> TeamManagement { get; set; }
 
-    public Manager(string registration, string name, string email, string password,
-        string zipCode, string street, int number, string area, string city, string state,
-        string? complement)
+    public Manager()
     {
-        User = new(registration, name, email, password);
-        Address = new(zipCode, street, number, area, area, city, complement);
+        
+    }
+
+    public Manager(User user, Address address)
+    {
+        User = AddUser(user.Registration, user.Name, user.Email, user.Password);
+        Address = AddAddress(address.ZipCode, address.Street, address.Number, address.Area,
+            address.City, address.State, address.Complement);
+    }
+
+    public User AddUser(string registration, string name, string email, string password)
+    {
+        return new(registration, name, email, password);
+    }
+
+    public Address AddAddress(string zipCode, string street, int number, string area,
+        string city, string state, string? complement)
+    {
+        return new(zipCode, street, number, area, city, state, complement);
     }
 }

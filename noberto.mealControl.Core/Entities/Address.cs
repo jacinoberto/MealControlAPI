@@ -14,7 +14,8 @@ public class Address : Identifier
     public string? Complement { get; private set; }
 
     public IEnumerable<Administrator> Administrators { get; set; }
-    public IEnumerable<Worker> Works { get; set; }
+    public IEnumerable<Manager> Managers { get; set; }
+    public IEnumerable<Work> Works { get; set; }
 
 
     public Address(string zipCode, string street, int number, string area, string city,

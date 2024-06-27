@@ -9,9 +9,11 @@ public class Meal : Identifier
     public bool Lunch { get; private set; }
     public bool Dinner { get; private set; }
 
+    public Guid AdministratorId { get; set; }
     public Guid TeamId { get; private set; }
-    public Team Team { get; private set; }
     public Guid ShecheduleLocalEventId { get; set; }
+    public Administrator Administrator { get; set; }
+    public Team Team { get; private set; }
     public ScheduleLocalEvent ScheduleLocalEvent { get; set; }
 
     public Meal(bool coffe, bool lunch, bool dinner)
