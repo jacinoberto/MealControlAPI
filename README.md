@@ -2,15 +2,36 @@
 <p>Back-End da segunda versão do <b>Meal Control</b>, aplicação para gerenciamento e controle de refeições de equipes em obra, seguindo o padrão de arquitetura Clean Architecture.</p>
 
 # Camadas implementadas:
-<p>Camada <b>Core</b> (Definir os modelos de entidades, seus comportamentos e validações, garantir o tratamento de exceções e definir quais métodos devem ser implementadas nas interfaces de repositórios)</p>
+<p><b>Camada Core</b></p>
+<ul>
+    <li>Definir os modelos de entidades, seus comportamentos e validações ✔️</li>
+    <li>Garantir o tratamento de exceções</li>
+    <li>Definir quais métodos devem ser implementados nas interfaces dos repositórios ✔️</li>
+</ul>
 
-<p>Camada <b>Application</b> (Definir os DTOs e seus mapeamentos com os modelos de domínimo, definir e implementar as interfaces dos serviços da aplicação e implementar o CQRS com seus commands, queries e handlers)</p>
+<p><b>Camada Application</b></p>
+<ul>
+    <li>Definir os DTOs e seus mapeamentos com os modelos de domínimo</li>
+    <li>Implementar o CQRS com seus commands, queries e handlers</li>
+    <li>Definir e implementar as interfaces dos serviços da aplicação</li>
+</ul>
 
-<p>Camada de infraestrutura <b>Database</b> (Definir o contexto da aplicação, fazer o mapeamento ORM, definir as configurações das entidades com FluentAPI e implemetar as interfaces dos repositórios)</p>
+<p><b>Camada de infraestrutura Database</b></p>
+<ul>
+    <li>Definir o contexto da aplicação e fazer o mapeamento ORM ✔️</li>
+    <li>Implementar as configurações das entidades com FluentAPI ✔️</li>
+    <li>Implemetar as interfaces dos repositórios</li>
+</ul>
 
-<p>Camada de infraestrutura <b>IoC</b> (Implementar o contêiner de injeção de dependência)</p>
+<p><b>Camada de infraestrutura IoC</b></p>
+<ul>
+    <li>Implementar o contêiner de injeção de dependência</li>
+</ul>
 
-<p>Camada <b>WebAPI</b> (Implementar controladores com os endpoints que serão consumidos)</p>
+<p><b>Camada WebAPI</b></p>
+<ul>
+    <li>Implementar controladores com os endpoints que serão consumidos</li>
+</ul>
 
 # Tecnologias utilizadas:
 <p>C#</p>
