@@ -5,7 +5,7 @@
 <h2><b>Camada Core</b></h2>
 <ul>
     <li>Definir os modelos de entidades, seus comportamentos e validações ✔️</li>
-    <li>Garantir o tratamento de exceções (Em andamento)</li> 
+    <li>Garantir o tratamento de exceções <b>(Em andamento)</b></li> 
     <li>Definir quais métodos devem ser implementados nas interfaces dos repositórios ✔️</li>
 </ul>
 
@@ -20,12 +20,12 @@
 <ul>
     <li>Definir o contexto da aplicação e fazer o mapeamento ORM ✔️</li>
     <li>Implementar as configurações das entidades com FluentAPI ✔️</li>
-    <li>Implemetar as interfaces dos repositórios (Em andamento)</li>
+    <li>Implemetar as interfaces dos repositórios <b>(Em andamento)</b></li>
 </ul>
 
 <h2><b>Camada de infraestrutura IoC</b></h2>
 <ul>
-    <li>Implementar o contêiner de injeção de dependência (Em andamento)</li>
+    <li>Implementar o contêiner de injeção de dependência <b>(Em andamento)</b></li>
 </ul>
 
 <h2><b>Camada WebAPI</b></h2>

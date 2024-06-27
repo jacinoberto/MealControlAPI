@@ -14,4 +14,10 @@ public class TypesNotFoundEnum : Enumeration
 
     public static TypesNotFoundEnum ManagerNotFoundForTheRegion =
         new("Nenhum encarregado encontrado. Ele pode não está cadastrado, ativo ou disponível para a sua região no sistema.");
+
+    // Worker
+    public static TypesNotFoundEnum WorkerNotFound =
+        new("Não foram encontrados operários cadastrados ou ativos no sistema pelo dado informado.");
+    public static TypesNotFoundEnum WorkerNotFoundById =
+        new("Não foi encontrado nenhum operário cadastrado ou ativo no sistema pelo ID informado.");
 }
