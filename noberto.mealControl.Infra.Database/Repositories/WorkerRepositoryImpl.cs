@@ -20,6 +20,18 @@ public class WorkerRepositoryImpl : IWorkerRepository
         _validations = validations;
     }
 
+    public async Task<Worker> CreateWorkerAsync(Worker worker)
+    {
+        foreach (var entity in _validations)
+        {
+            await entity.Validate(worker);
+        }
+
+        await _context.AddAsync(worker);
+        await _context.SaveChangesAsync();
+        return worker;
+    }
+
     public async Task<IEnumerable<Worker>> CreateWorkersAsync(IEnumerable<Worker> workers)
     {
         foreach (var worker in workers)

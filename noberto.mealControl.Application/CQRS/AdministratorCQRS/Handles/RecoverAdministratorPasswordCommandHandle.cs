@@ -3,14 +3,14 @@ using noberto.mealControl.Application.CQRS.AdministratorCQRS.Commands;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 
-namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Handlers;
+namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Handles;
 
-public class RecoverAdministratorPasswordCommandHandler
+public class RecoverAdministratorPasswordCommandHandle
     : IRequestHandler<RecoverAdministratorPasswordCommand, Administrator>
 {
     private readonly IAdministratorRepository _repository;
 
-    public RecoverAdministratorPasswordCommandHandler(IAdministratorRepository repository)
+    public RecoverAdministratorPasswordCommandHandle(IAdministratorRepository repository)
     {
         _repository = repository;
     }

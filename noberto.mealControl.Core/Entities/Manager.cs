@@ -10,26 +10,12 @@ public class Manager : Identifier
     public Address Address { get; set; }
     public IEnumerable<TeamManagement> TeamManagement { get; set; }
 
-    public Manager()
-    {
-        
-    }
+    public Manager() {}
 
-    public Manager(User user, Address address)
+    public Manager(string registration, string name, string email, string password, string zipCode,
+        string street, int number, string area, string city, string state, string? complement)
     {
-        User = AddUser(user.Registration, user.Name, user.Email, user.Password);
-        Address = AddAddress(address.ZipCode, address.Street, address.Number, address.Area,
-            address.City, address.State, address.Complement);
-    }
-
-    public User AddUser(string registration, string name, string email, string password)
-    {
-        return new(registration, name, email, password);
-    }
-
-    public Address AddAddress(string zipCode, string street, int number, string area,
-        string city, string state, string? complement)
-    {
-        return new(zipCode, street, number, area, city, state, complement);
+        User = new(registration, name, email, password);
+        Address = new(zipCode, street, number, area, city, state, complement);
     }
 }

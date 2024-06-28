@@ -3,14 +3,14 @@ using noberto.mealControl.Application.CQRS.AdministratorCQRS.Commands;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 
-namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Handlers;
+namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Handles;
 
-public class CreateAdministratorCommandHandler
+public class CreateAdministratorCommandHandle
     : IRequestHandler<CreateAdministratorCommand, Administrator>
 {
     private readonly IAdministratorRepository _repository;
 
-    public CreateAdministratorCommandHandler(IAdministratorRepository repository)
+    public CreateAdministratorCommandHandle(IAdministratorRepository repository)
     {
         _repository = repository;
     }
