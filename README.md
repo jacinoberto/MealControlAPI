@@ -1,4 +1,4 @@
-# MealControl API com Clean Architecture [![My Skills](https://skillicons.dev/icons?i=cs)](https://skillicons.dev)
+# MealControl API com Clean Architecture [![My Skills](https://skillicons.dev/icons?i=cs,dotnet)](https://skillicons.dev)
 <p>Back-End da segunda versão do <b>Meal Control</b>, aplicação para gerenciamento e controle de refeições de equipes em obra, seguindo o padrão de arquitetura Clean Architecture.</p>
 
 # Camadas implementadas:

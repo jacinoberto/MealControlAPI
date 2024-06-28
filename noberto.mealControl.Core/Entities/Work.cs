@@ -17,9 +17,11 @@ public class Work : Identifier
     public IEnumerable<TeamManagement> TeamManagemant { get; set; }
     public IEnumerable<ScheduleLocalEvent> ScheduleLocalEvents { get; set; }
 
-    public Work(string identification, DateOnly startDate)
+    public Work(string identification, DateOnly startDate, string zipCode, string street, int number,
+        string area, string city, string state, string? complement)
     {
         ValidateWorkData(identification, startDate);
+        Address = new(zipCode, street, number, area, city, state, complement);
     }
 
     /// <summary>

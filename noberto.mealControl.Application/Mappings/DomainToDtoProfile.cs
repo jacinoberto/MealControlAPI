@@ -3,6 +3,7 @@ using noberto.mealControl.Application.DTOs.AddressDTO;
 using noberto.mealControl.Application.DTOs.AdministratorDTO;
 using noberto.mealControl.Application.DTOs.ManagerDTO;
 using noberto.mealControl.Application.DTOs.UserDTO;
+using noberto.mealControl.Application.DTOs.WorkDTO;
 using noberto.mealControl.Application.DTOs.WorkerDTO;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Entity;
@@ -17,6 +18,9 @@ public class DomainToDtoProfile : Profile
             .ReverseMap();
 
         CreateMap<Address, ReturnAddressDTO>()
+            .ReverseMap();
+
+        CreateMap<Address, ReturnCityDTO>()
             .ReverseMap();
 
         CreateMap<User, ReturnUsernameDTO>()
@@ -51,6 +55,16 @@ public class DomainToDtoProfile : Profile
             .ReverseMap();
 
         CreateMap<Worker, ReturnWorkerDTO>()
+            .ReverseMap();
+
+        CreateMap<Work, CreateWorkDTO>()
+            .ForMember(workDto => workDto.Address,
+            option => option.MapFrom(work => work.Address))
+            .ReverseMap();
+
+        CreateMap<Work, WorkSelectDTO>()
+            .ForMember(workDto => workDto.Address,
+            option => option.MapFrom(work => work.Address))
             .ReverseMap();
     }
 }
