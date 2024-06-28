@@ -20,7 +20,7 @@ public static class DependencyInjection
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly(typeof(MealControlDbContext).Assembly.FullName)));
 
-        // Registrando Repositórios
+        // Registrando repositórios
         services.AddScoped<IAdministratorRepository, AdministratorRepositoryImpl>();
         services.AddScoped<IManagerRepository, ManagerRepositoryImlp>();
         services.AddScoped<IWorkerRepository, WorkerRepositoryImpl>();
@@ -31,7 +31,7 @@ public static class DependencyInjection
         services.AddScoped<IScheduleLocalEventRepository, ScheduleLocalEventRepositoryImpl>();
         services.AddScoped<IMealRepository, MealRepositoryImpl>();
 
-        //Registrando Validações
+        //Registrando validações dos dados quando cadastrados
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminEmailError>();
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminRegistrationError>();
         services.AddScoped<IValidateStrategy<Manager>, DuplicateManagerEmailError>();
