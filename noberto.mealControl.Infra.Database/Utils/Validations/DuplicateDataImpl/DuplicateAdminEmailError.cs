@@ -20,7 +20,7 @@ public class DuplicateAdminEmailError : IValidateStrategy<Administrator>
         var admin = await _context.Administrators
              .FirstOrDefaultAsync(admin => admin.User.Email == entity.User.Email);
 
-        if (admin is null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
-            .DuplicateAdminEmail.ToString());
+        if (admin is not null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
+            .DuplicateAdminEmail.ToString(), entity.User.Email);
     }
 }

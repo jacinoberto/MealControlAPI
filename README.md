@@ -20,7 +20,7 @@
 <ul>
     <li>Definir o contexto da aplicação e fazer o mapeamento ORM ✔️</li>
     <li>Implementar as configurações das entidades com FluentAPI ✔️</li>
-    <li>Implemetar as interfaces dos repositórios <b>(Em andamento)</b></li>
+    <li>Implemetar as interfaces dos repositórios <b> ✔️</b></li>
 </ul>
 
 <h2><b>Camada de infraestrutura IoC</b></h2>

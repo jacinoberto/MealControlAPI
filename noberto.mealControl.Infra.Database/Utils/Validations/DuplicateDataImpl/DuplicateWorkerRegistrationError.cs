@@ -21,7 +21,7 @@ public class DuplicateWorkerRegistrationError : IValidateStrategy<Worker>
         .FirstOrDefaultAsync(worker => worker.Registration == entity.Registration
         && worker.ActiveProfile == true);
 
-        if (worker is null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
-            .DuplicateWorkerRegistration.ToString());
+        if (worker is not null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
+            .DuplicateWorkerRegistration.ToString(), entity.Registration);
     }
 }

@@ -20,7 +20,7 @@ public class DuplicateManagerRegistrationError : IValidateStrategy<Manager>
         var manager = await _context.Managers
             .FirstOrDefaultAsync(manager => manager.User.Registration == entity.User.Registration);
 
-        if (manager is null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
-            .DuplicateManagerRegistration.ToString());
+        if (manager is not null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
+            .DuplicateManagerRegistration.ToString(), entity.User.Registration);
     }
 }

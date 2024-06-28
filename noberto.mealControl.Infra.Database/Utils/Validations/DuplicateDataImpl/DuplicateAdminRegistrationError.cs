@@ -20,7 +20,7 @@ public class DuplicateAdminRegistrationError : IValidateStrategy<Administrator>
         var admin = await _context.Administrators
             .FirstOrDefaultAsync(admin => admin.User.Registration == entity.User.Registration);
 
-        if (admin is null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
-            .DuplicateAdminRegistration.ToString());
+        if (admin is not null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
+            .DuplicateAdminRegistration.ToString(), entity.User.Registration);
     }
 }

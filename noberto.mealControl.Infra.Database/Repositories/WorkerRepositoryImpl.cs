@@ -10,7 +10,7 @@ namespace noberto.mealControl.Infra.Database.Repositories;
 
 public class WorkerRepositoryImpl : IWorkerRepository
 {
-     readonly MealControlDbContext _context;
+    private readonly MealControlDbContext _context;
     private readonly IEnumerable<IValidateStrategy<Worker>> _validations;
 
     public WorkerRepositoryImpl(MealControlDbContext context,
@@ -59,8 +59,12 @@ public class WorkerRepositoryImpl : IWorkerRepository
             : throw new EntityNotFoundException(TypesNotFoundEnum.ManagerNotFound.ToString());
     }
 
-    public Task<Worker> InactivateWorkerProfileAsync(Worker worker)
+    public async Task<Worker> InactivateWorkerProfileAsync(Guid workerId)
     {
-        throw new NotImplementedException();
+        var worker = await GetWorkerByIdAsync(workerId);
+
+        worker.DeactivateProfile();
+        await _context.SaveChangesAsync();
+        return worker;
     }
 }

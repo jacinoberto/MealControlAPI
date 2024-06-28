@@ -2,10 +2,10 @@
 
 namespace noberto.mealControl.Core.Repositories;
 
-public interface ITeamManagement
+public interface ITeamManagementRepository
 {
     Task<TeamManagement> CreateTeamManagementAsync(TeamManagement teamManagement);
     Task<TeamManagement> GetTeamManagementByIdAsync(Guid teamManagementId);
     Task<IEnumerable<TeamManagement>> GetTeamManagementByStateAsync(string state);
-    Task<TeamManagement> DisableTeamManagementAsync(TeamManagement teamManagement);
+    Task<TeamManagement> DisableTeamManagementAsync(Guid teamManagementId);
 }

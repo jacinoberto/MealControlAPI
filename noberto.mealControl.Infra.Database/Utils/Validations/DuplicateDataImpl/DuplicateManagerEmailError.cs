@@ -20,7 +20,7 @@ public class DuplicateManagerEmailError : IValidateStrategy<Manager>
         var manager = await _context.Managers
             .FirstOrDefaultAsync(manager => manager.User.Email == entity.User.Email);
 
-        if (manager is null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
-            .DuplicateManagerEmail.ToString());
+        if (manager is not null) throw new DuplicateDataException(TypesOfInternalServerErrorEnum
+            .DuplicateManagerEmail.ToString(), entity.User.Email);
     }
 }
