@@ -2,6 +2,11 @@
 using noberto.mealControl.Application.DTOs.AddressDTO;
 using noberto.mealControl.Application.DTOs.AdministratorDTO;
 using noberto.mealControl.Application.DTOs.ManagerDTO;
+using noberto.mealControl.Application.DTOs.MealDTO;
+using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
+using noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
+using noberto.mealControl.Application.DTOs.TeamDTO;
+using noberto.mealControl.Application.DTOs.TeamManagement;
 using noberto.mealControl.Application.DTOs.UserDTO;
 using noberto.mealControl.Application.DTOs.WorkDTO;
 using noberto.mealControl.Application.DTOs.WorkerDTO;
@@ -57,6 +62,9 @@ public class DomainToDtoProfile : Profile
         CreateMap<Worker, ReturnWorkerDTO>()
             .ReverseMap();
 
+        CreateMap<Worker, ReturnWorkerNameDTO>()
+            .ReverseMap();
+
         CreateMap<Work, CreateWorkDTO>()
             .ForMember(workDto => workDto.Address,
             option => option.MapFrom(work => work.Address))
@@ -65,6 +73,36 @@ public class DomainToDtoProfile : Profile
         CreateMap<Work, WorkSelectDTO>()
             .ForMember(workDto => workDto.Address,
             option => option.MapFrom(work => work.Address))
+            .ReverseMap();
+
+        CreateMap<TeamManagement, CreateTeamManagementDTO>()
+            .ReverseMap();
+
+        CreateMap<TeamManagement, TeamManagementSelectDTO>()
+            .ForMember(teamManagementDto => teamManagementDto.Manager,
+            option => option.MapFrom(teamManagement => teamManagement.Manager))
+            .ReverseMap();
+
+        CreateMap<Team, CreateTeamDTO>()
+            .ReverseMap();
+
+        CreateMap<Team, ReturnTeamWorkerDTO>()
+            .ForMember(teamDto => teamDto.Worker,
+            option => option.MapFrom(team => team.Worker))
+            .ReverseMap();
+
+        CreateMap<ScheduleEvent, CreateScheduleEventDTO>()
+            .ReverseMap();
+
+        CreateMap<ScheduleLocalEvent, CreateScheduleLocalEventDTO>()
+            .ReverseMap();
+
+        CreateMap<Meal, CreateMealDTO>()
+            .ReverseMap();
+
+        CreateMap<Meal, ReturnMealDTO>()
+            .ForMember(mealDto => mealDto.Worker,
+            option => option.MapFrom(meal => meal.Team))
             .ReverseMap();
     }
 }

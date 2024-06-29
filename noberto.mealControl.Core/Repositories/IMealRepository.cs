@@ -7,5 +7,5 @@ public interface IMealRepository
     Task<Meal> CreateMealAsync(Meal meal);
     Task<Meal> GetMealByIdAsync(Guid mealId);
     Task<IEnumerable<Meal>> GetMealsByIdManagerAndDateAsync(Guid managerId, DateOnly date);
-    Task<IEnumerable<Meal>> UpdateMealsAsync(IEnumerable<Meal> meals);
+    Task<Meal> UpdateMealsAsync(Meal meal);
 }

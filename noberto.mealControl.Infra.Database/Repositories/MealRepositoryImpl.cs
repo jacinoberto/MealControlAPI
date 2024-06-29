@@ -41,15 +41,12 @@ public class MealRepositoryImpl : IMealRepository
                 .MealNotFoundByManagerIdAndDate.ToString());
     }
 
-    public async Task<IEnumerable<Meal>> UpdateMealsAsync(IEnumerable<Meal> meals)
+    public async Task<Meal> UpdateMealsAsync(Meal meal)
     {
-        foreach (var meal in meals)
-        {
-            var mealEntity = await _context.Meals.FindAsync(meal.Id);
-            mealEntity.UpdateMeal(meal.Coffe, meal.Lunch, meal.Dinner);
-            await _context.SaveChangesAsync();
-        }
+        var mealEntity = await _context.Meals.FindAsync(meal.Id);
+        mealEntity.UpdateMeal(meal.Coffe, meal.Lunch, meal.Dinner);
+        await _context.SaveChangesAsync();
 
-        return meals;
+        return meal;
     }
 }
