@@ -42,6 +42,21 @@ public class TeamManagementRepositoryImpl : ITeamManagementRepository
                     : throw new ServerErrorException(TypesOfInternalServerErrorEnum
                         .InactiveTeamManagement.ToString());
     }
+    public async Task<IEnumerable<TeamManagement>> GetTeamManagementByManagerIdAsync(Guid managerId)
+    {
+        return await _context.TeamManagement
+            .Where(teamManagement => teamManagement.ManagerId == managerId
+            && teamManagement.ActiveTeam == true)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<TeamManagement>> GetTeamManagementByWorkIdAsync(Guid workId)
+    {
+        return await _context.TeamManagement
+            .Where(teamManagement => teamManagement.WorkId == workId
+            && teamManagement.ActiveTeam == true)
+            .ToListAsync();
+    }
 
     public async Task<IEnumerable<TeamManagement>> GetTeamManagementByStateAsync(string state)
     {
@@ -63,4 +78,6 @@ public class TeamManagementRepositoryImpl : ITeamManagementRepository
         await _context.SaveChangesAsync();
         return teamManagement;
     }
+
+    
 }

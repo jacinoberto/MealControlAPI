@@ -34,6 +34,14 @@ public class TeamRepositoryImpl : ITeamRepository
                         .InactiveTeam.ToString());
     }
 
+    public async Task<IEnumerable<Team>> GetTeamsByWorkerIdAsync(Guid workerId)
+    {
+        return await _context.Teams
+            .Where(team => team.WorkerId == workerId
+            && team.ActiveTeam == true)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Team>> GetTeamsByIdManagerAsync(Guid managerId)
     {
         var teams = await _context.Teams
@@ -46,6 +54,30 @@ public class TeamRepositoryImpl : ITeamRepository
                 TeamNotFoundByManagerId.ToString());
     }
 
+    public async Task<IEnumerable<Team>> GetTeamsByManagerIdAsync(Guid managerId)
+    {
+        return await _context.Teams
+            .Where(team => team.TeamManagement.ManagerId == managerId
+            && team.ActiveTeam == true)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Team>> GetTeamsByWorkIdAsync(Guid workId)
+    {
+        return await _context.Teams
+            .Where(team => team.TeamManagement.WorkId == workId
+            && team.ActiveTeam == true)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Team>> GetTeamsByTeamManagementIdAsync(Guid teamManagementId)
+    {
+        return await _context.Teams
+            .Where(team => team.TeamManagementId == teamManagementId
+            && team.ActiveTeam == true)
+            .ToListAsync();
+    }
+
     public async Task<Team> DisableTeamAsync(Guid teamId)
     {
         var team = await GetTeamByIdAsync(teamId);
@@ -54,4 +86,6 @@ public class TeamRepositoryImpl : ITeamRepository
         await _context.SaveChangesAsync();
         return team;
     }
+
+    
 }

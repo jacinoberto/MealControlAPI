@@ -4,7 +4,7 @@ using noberto.mealControl.Core.Entities;
 
 namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Commands;
 
-public class CreateAdministratorCommand : IRequest<Administrator>
+public class CreateManagerCommand : IRequest<Administrator>
 {
     public string Registration { get; set; }
     public string Name { get; set; }
@@ -12,7 +12,7 @@ public class CreateAdministratorCommand : IRequest<Administrator>
     public string Password { get; set; }
     public CreateAddressCommand Address { get; set; }
 
-    public CreateAdministratorCommand(string registration, string name, string email,
+    public CreateManagerCommand(string registration, string name, string email,
         string password, CreateAddressCommand address)
     {
         Registration = registration;

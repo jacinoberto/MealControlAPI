@@ -11,9 +11,9 @@
 
 <h2><b>Camada Application</b></h2>
 <ul>
-    <li>Definir os DTOs e seus mapeamentos com os modelos de domínimo <b>(Em andamento)</b></li>
-    <li>Implementar o CQRS com seus commands, queries e handlers <b>(Em andamento)</b></li>
-    <li>Definir e implementar as interfaces dos serviços da aplicação</li>
+    <li>Definir os DTOs e seus mapeamentos com os modelos de domínimo ✔️</li>
+    <li>Implementar o CQRS com seus commands, queries e handlers ✔️</li>
+    <li>Definir e implementar as interfaces dos serviços da aplicação ✔️</li>
 </ul>
 
 <h2><b>Camada de infraestrutura Database</b></h2>
