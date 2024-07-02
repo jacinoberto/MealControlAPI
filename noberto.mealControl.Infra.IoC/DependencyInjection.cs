@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using noberto.mealControl.Application.Interfaces;
+using noberto.mealControl.Application.Mappings;
+using noberto.mealControl.Application.Services;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 using noberto.mealControl.Infra.Database.Context;
@@ -20,6 +23,11 @@ public static class DependencyInjection
         options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly(typeof(MealControlDbContext).Assembly.FullName)));
 
+        services.AddAutoMapper(typeof(DomainToDtoProfile));
+
+        var myHandlers = AppDomain.CurrentDomain.Load("noberto.mealControl.Application");
+        services.AddMediatR(config => config.RegisterServicesFromAssemblies(myHandlers));
+
         // Registrando repositórios
         services.AddScoped<IAdministratorRepository, AdministratorRepositoryImpl>();
         services.AddScoped<IManagerRepository, ManagerRepositoryImlp>();
@@ -30,6 +38,16 @@ public static class DependencyInjection
         services.AddScoped<IScheduleEventRepository, ScheduleEventRepositoryImpl>();
         services.AddScoped<IScheduleLocalEventRepository, ScheduleLocalEventRepositoryImpl>();
         services.AddScoped<IMealRepository, MealRepositoryImpl>();
+
+        services.AddScoped<IAdministratorService, AdministratorServiceImpl>();
+        services.AddScoped<IManagerService, ManagerServiceImpl>();
+        services.AddScoped<IWorkerService, WorkerServiceImpl>();
+        services.AddScoped<IWorkService, WorkServiceImpl>();
+        services.AddScoped<ITeamManagementService, TeamManagementServiceImpl>();
+        services.AddScoped<ITeamService, TeamServiceImpl>();
+        services.AddScoped<IScheduleEventService, ScheduleEventServiceImpl>();
+        services.AddScoped<IScheduleLocalEventService, ScheduleLocalEventServiceImpl>();
+        //services.AddScoped<IMealService, MealServiceImpl>();
 
         //Registrando validações dos dados quando cadastrados
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminEmailError>();

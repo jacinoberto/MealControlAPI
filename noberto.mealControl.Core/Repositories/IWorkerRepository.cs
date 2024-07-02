@@ -4,7 +4,7 @@ namespace noberto.mealControl.Core.Repositories;
 
 public interface IWorkerRepository
 {
-    Task<Worker> CreateWorkerAsync(Worker worker);
+    Task<IEnumerable<Worker>> CreateWorkerAsync(IEnumerable<Worker> workers);
     Task<Worker> GetWorkerByIdAsync(Guid workerId);
     Task<IEnumerable<Worker>> GetWorkersByRegistrationOrNameAsync(string registrationOrName);
     Task<Worker> InactivateWorkerProfileAsync(Guid workerId);

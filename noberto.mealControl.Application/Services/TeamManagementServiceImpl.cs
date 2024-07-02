@@ -20,7 +20,7 @@ public class TeamManagementServiceImpl : ITeamManagementService
 
     public async Task CreateTeamManagementAsync(CreateTeamManagementDTO teamManagementDTO)
     {
-        var teamManagement = _mapper.Map<CreateTeamManagementDTO>(teamManagementDTO);
+        var teamManagement = _mapper.Map<CreateTeamManagementCommand>(teamManagementDTO);
         await _mediator.Send(teamManagement);
     }
 

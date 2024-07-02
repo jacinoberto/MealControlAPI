@@ -17,9 +17,10 @@ public class CreateWorkCommandHandle
 
     public async Task<Work> Handle(CreateWorkCommand request, CancellationToken cancellationToken)
     {
-        var work = new Work(request.Identification, request.StartDate, request.Address.Street,
-            request.Address.ZipCode, request.Address.Number, request.Address.Area,
+        var work = new Work(request.Identification, request.StartDate, request.Address.ZipCode,
+            request.Address.Street, request.Address.Number, request.Address.Area,
             request.Address.City, request.Address.State, request.Address.Complement);
+        work.AdministratorId = request.AdministratorId;
 
         return await _repository.CreateWorkAsync(work);
     }

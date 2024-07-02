@@ -18,19 +18,19 @@ public class AdministratorServiceImpl : IAdministratorService
         _mediator = mediator;
     }
 
-    public async Task CreateAdministratorAsync(CreateAdministratorDTO administratorDto)
+    public async Task<Administrator> CreateAdministratorAsync(CreateAdministratorDTO administratorDto)
     {
-        var administrator = _mapper.Map<CreateManagerCommand>(administratorDto);
+        var administrator = _mapper.Map<CreateAdministratorCommand>(administratorDto);
+        return await _mediator.Send(administrator);
+    }
+
+    public async Task RecoverAdministratorPasswordAsync(Guid administratorId, RecoverAdministratorPasswordDTO recoverPasswordDto)
+    {
+        var administrator = new RecoverAdministratorPasswordCommand(administratorId, recoverPasswordDto.User.Password);
         await _mediator.Send(administrator);
     }
 
-    public async Task RecoverAdministratorPassword(Guid administratorId, string password)
-    {
-        var administrator = new RecoverAdministratorPasswordCommand(administratorId, password);
-        await _mediator.Send(administrator);
-    }
-
-    public async Task InactivateAdministratorProfile(Guid administratorId)
+    public async Task InactivateAdministratorProfileAsync(Guid administratorId)
     {
         var administrator = new InactivateAdministratorProfileCommand(administratorId);
         await _mediator.Send(administrator);

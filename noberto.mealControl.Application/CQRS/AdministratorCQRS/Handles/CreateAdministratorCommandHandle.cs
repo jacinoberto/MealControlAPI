@@ -6,7 +6,7 @@ using noberto.mealControl.Core.Repositories;
 namespace noberto.mealControl.Application.CQRS.AdministratorCQRS.Handles;
 
 public class CreateAdministratorCommandHandle
-    : IRequestHandler<CreateManagerCommand, Administrator>
+    : IRequestHandler<CreateAdministratorCommand, Administrator>
 {
     private readonly IAdministratorRepository _repository;
 
@@ -15,7 +15,7 @@ public class CreateAdministratorCommandHandle
         _repository = repository;
     }
 
-    public async Task<Administrator> Handle(CreateManagerCommand request,
+    public async Task<Administrator> Handle(CreateAdministratorCommand request,
         CancellationToken cancellationToken)
     {
         var administrator = new Administrator(request.Registration, request.Name, request.Email, request.Password,

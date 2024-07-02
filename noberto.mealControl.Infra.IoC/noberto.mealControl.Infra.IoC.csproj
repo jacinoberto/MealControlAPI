@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\noberto.mealControl.Application\noberto.mealControl.Application.csproj" />
     <ProjectReference Include="..\noberto.mealControl.Core\noberto.mealControl.Core.csproj" />
     <ProjectReference Include="..\noberto.mealControl.Infra.Database\noberto.mealControl.Infra.Database.csproj" />

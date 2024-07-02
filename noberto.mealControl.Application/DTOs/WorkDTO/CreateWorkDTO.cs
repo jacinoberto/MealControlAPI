@@ -12,5 +12,8 @@ public record struct CreateWorkDTO(
     [Required(ErrorMessage = "A Data Inicial é obrigatória.")]
     DateOnly StartDate,
 
+    [Required(ErrorMessage = "O ID do Administrador é obrigatório.")]
+    Guid AdministratorId,
+
     CreateAddressDTO Address
     );

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using noberto.mealControl.Application.CQRS.WorkerCQRS.Commands;
 using noberto.mealControl.Core.Entities;
 
 namespace noberto.mealControl.Application.CQRS.TeamManagementCQRS.Commands;
@@ -10,8 +11,7 @@ public class CreateTeamManagementCommand : IRequest<TeamManagement>
     public Guid WorkId { get; set; }
     public string Sector { get; set; }
 
-    public CreateTeamManagementCommand(Guid administratorId, Guid managerId, Guid workId,
-        string sector)
+    public CreateTeamManagementCommand(Guid administratorId, Guid managerId, Guid workId, string sector)
     {
         AdministratorId = administratorId;
         ManagerId = managerId;

@@ -4,5 +4,5 @@ namespace noberto.mealControl.Application.Interfaces;
 
 public interface IScheduleEventService
 {
-    Task CreateScheduleEventAsync(CreateScheduleEventDTO scheduleEventDto)
+    Task CreateScheduleEventAsync(CreateScheduleEventDTO scheduleEventDto);
 }

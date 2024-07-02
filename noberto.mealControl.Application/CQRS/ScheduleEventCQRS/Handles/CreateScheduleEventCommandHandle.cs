@@ -6,19 +6,40 @@ using noberto.mealControl.Core.Repositories;
 namespace noberto.mealControl.Application.CQRS.ScheduleEventCQRS.Handles;
 
 public class CreateScheduleEventCommandHandle
-    : IRequestHandler<CreateScheduleEventCommand, ScheduleEvent>
+    : IRequestHandler<CreateScheduleEventCommand, IList<ScheduleEvent>>
 {
     private readonly IScheduleEventRepository _repository;
+    private readonly IWorkRepository _workerRepository;
+    private readonly IScheduleLocalEventRepository _scheduleLocalEventRepository;
 
-    public CreateScheduleEventCommandHandle(IScheduleEventRepository repository)
+    public CreateScheduleEventCommandHandle(IScheduleEventRepository repository, IWorkRepository workerRepository, IScheduleLocalEventRepository scheduleLocalEventRepository)
     {
         _repository = repository;
+        _workerRepository = workerRepository;
+        _scheduleLocalEventRepository = scheduleLocalEventRepository;
     }
 
-    public async Task<ScheduleEvent> Handle(CreateScheduleEventCommand request, CancellationToken cancellationToken)
+    public async Task<IList<ScheduleEvent>> Handle(CreateScheduleEventCommand request, CancellationToken cancellationToken)
     {
-        var scheduleEvent = new ScheduleEvent(request.MealDate, request.Description, request.Atypical);
+        var works = await _workerRepository.GetWorksByCityAsync(request.Citys);
+        IList<ScheduleEvent> e = [];
+        foreach (var work in works)
+        {
+            var scheduleEvent = new ScheduleEvent(request.MealDate, request.Description,
+                request.Atypical);
+            scheduleEvent.AdministratorId = request.AdministratorId;
+            
+            var result = await _repository.CreateScheduleEventAsync(scheduleEvent);
+            e.Add(result);
 
-        return await _repository.CreateScheduleEventAsync(scheduleEvent);
+            var scheduleLocal = new ScheduleLocalEvent();
+            scheduleLocal.AdministratorId = request.AdministratorId;
+            scheduleLocal.ScheduleEventId = result.Id;
+            scheduleLocal.WorkId  = work.Id;
+
+            await _scheduleLocalEventRepository.CreateScheduleLocalEventAsync(scheduleLocal);
+        }
+
+        return e;
     }
 }

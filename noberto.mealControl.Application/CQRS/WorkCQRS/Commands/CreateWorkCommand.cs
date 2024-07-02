@@ -11,6 +11,11 @@ public class CreateWorkCommand : IRequest<Work>
     public Guid AdministratorId { get; set; }
     public CreateAddressCommand Address { get; set; }
 
+    public CreateWorkCommand()
+    {
+        
+    }
+
     public CreateWorkCommand(string identification, DateOnly startDate, Guid administratorId,
         CreateAddressCommand address)
     {

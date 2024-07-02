@@ -61,8 +61,9 @@ public class TeamManagementRepositoryImpl : ITeamManagementRepository
     public async Task<IEnumerable<TeamManagement>> GetTeamManagementByStateAsync(string state)
     {
         var teamManagement = await _context.TeamManagement
-            .Where(teamManagement => teamManagement.Manager.Address.State == state
+            .Where(teamManagement => teamManagement.Manager.Address.State.ToUpper() == state.ToUpper()
             && teamManagement.ActiveTeam == true)
+            .Include(teamManagement => teamManagement.Manager)
             .ToListAsync();
 
         return teamManagement.Count is not 0 ? teamManagement

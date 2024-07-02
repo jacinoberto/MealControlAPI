@@ -11,7 +11,7 @@ public class GetMealByManagerIdAndDateQueryHandle
 {
     private readonly IMealRepository _repository;
 
-    public GetMealByManagerIdAndDateQueryHandle(IMealRepository repository, )
+    public GetMealByManagerIdAndDateQueryHandle(IMealRepository repository)
     {
         _repository = repository;
     }

@@ -27,7 +27,7 @@ public class ManagerRepositoryImlp : IManagerRepository
             await entity.Validate(manager);
         }
 
-        await _context.AddAsync(manager);
+        await _context.Managers.AddAsync(manager);
         await _context.SaveChangesAsync();
         return manager;
     }
@@ -58,7 +58,7 @@ public class ManagerRepositoryImlp : IManagerRepository
     public async Task<IEnumerable<Manager>> GetManagersByStateAsync(string state)
     {
         var managers = await _context.Managers
-            .Where(manager => manager.Address.State == state
+            .Where(manager => manager.Address.State.ToUpper() == state.ToUpper()
             && manager.User.ActiveProfile == true)
             .ToListAsync();
 

@@ -43,8 +43,9 @@ public class WorkRepositoryImpl : IWorkRepository
     public async Task<IEnumerable<Work>> GetWorksByStateAsync(string state)
     {
         var works = await _context.Works
-            .Where(work => work.Address.State == state
+            .Where(work => work.Address.State.ToUpper() == state.ToUpper()
             && work.ClosingDate == null)
+            .Include(work => work.Address)
             .ToListAsync();
 
         return works.Count is not 0 ? works
@@ -58,5 +59,26 @@ public class WorkRepositoryImpl : IWorkRepository
         work.FinishWork();
         await _context.SaveChangesAsync();
         return work;
+    }
+
+    public async Task<IEnumerable<Work>> GetWorksByCityAsync(IEnumerable<string> cities)
+    {
+        IList<Work> works = new List<Work>();
+
+        foreach (var city in cities)
+        {
+            var cityUpper = city.ToUpper();
+            var results = await _context.Works
+                .Where(work => work.Address.City.ToUpper().Contains(cityUpper)
+                && work.ClosingDate == null)
+                .ToListAsync();
+
+            foreach (var result in results)
+            {
+                works.Add(result);
+            }
+        }
+
+        return works.Count != 0 ? works : await _context.Works.ToArrayAsync();
     }
 }

@@ -22,7 +22,7 @@ public class WorkServiceImpl : IWorkService
     public async Task CreateWorkAsync(CreateWorkDTO workDto)
     {
         var work = _mapper.Map<CreateWorkCommand>(workDto);
-        await _mediator.Publish(work);
+        await _mediator.Send(work);
     }
     public async Task<IEnumerable<WorkSelectDTO>> GetWorksByStateAsync(string state)
     {
