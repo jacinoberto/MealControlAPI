@@ -22,8 +22,7 @@ public class ScheduleLocalEventConfiguration : IEntityTypeConfiguration<Schedule
             .HasColumnName("id_schedule_event");
 
         builder.Property(scheduleLocalEvent => scheduleLocalEvent.AdministratorId)
-            .HasColumnName("administrator_id")
-            .IsRequired();
+            .HasColumnName("administrator_id");
 
         builder.Property(scheduleLocalEvent => scheduleLocalEvent.ScheduleEventId)
             .HasColumnName("schedule_event_id")

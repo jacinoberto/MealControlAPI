@@ -6,12 +6,17 @@ namespace noberto.mealControl.Core.Entities;
 public class ScheduleEvent : Identifier
 {
     public DateOnly MealDate { get; private set; }
-    public string Description { get; private set; }
+    public string? Description { get; private set; }
     public bool Atypical { get; private set; }
 
-    public Guid AdministratorId { get; set; }
+    public Guid? AdministratorId { get; set; }
     public Administrator Administrator { get; set; }
     public IEnumerable<ScheduleLocalEvent> ScheduleLocalEvents { get; set; }
+
+    public ScheduleEvent()
+    {
+        
+    }
 
     public ScheduleEvent(DateOnly mealDate, string description, bool atypical)
     {
@@ -23,7 +28,7 @@ public class ScheduleEvent : Identifier
     /// </summary>
     /// <param name="mealDate"></param>
     /// <param name="description"></param>
-    private void ValidateScheduleEventData(DateOnly mealDate, string description, bool atypical)
+    private void ValidateScheduleEventData(DateOnly mealDate, string? description, bool atypical)
     {
         InvalidEntityDataException.When(mealDate == null,
             BadInternalOrdersEnum.MealDateIsNull.ToString());
@@ -31,10 +36,10 @@ public class ScheduleEvent : Identifier
         InvalidEntityDataException.When(mealDate < DateOnly.FromDateTime(DateTime.UtcNow),
             BadInternalOrdersEnum.PastMealDate.ToString());
 
-        InvalidEntityDataException.When(description.Length < 5,
+        InvalidEntityDataException.When(description?.Length < 5,
             BadInternalOrdersEnum.ShortDescription.ToString());
 
-        InvalidEntityDataException.When(description.Length > 100,
+        InvalidEntityDataException.When(description?.Length > 100,
             BadInternalOrdersEnum.LongDescription.ToString());
 
         MealDate = mealDate;

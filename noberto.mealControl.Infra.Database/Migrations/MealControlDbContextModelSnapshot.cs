@@ -158,7 +158,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id_team");
 
-                    b.Property<Guid>("AdministratorId")
+                    b.Property<Guid?>("AdministratorId")
                         .HasColumnType("uuid")
                         .HasColumnName("administrator_id");
 
@@ -189,7 +189,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id_schedule_event");
 
-                    b.Property<Guid>("AdministratorId")
+                    b.Property<Guid?>("AdministratorId")
                         .HasColumnType("uuid")
                         .HasColumnName("administrator_id");
 
@@ -504,9 +504,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                 {
                     b.HasOne("noberto.mealControl.Core.Entities.Administrator", "Administrator")
                         .WithMany("ScheduleEvents")
-                        .HasForeignKey("AdministratorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdministratorId");
 
                     b.Navigation("Administrator");
                 });
@@ -515,9 +513,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                 {
                     b.HasOne("noberto.mealControl.Core.Entities.Administrator", "Administrator")
                         .WithMany("ScheduleLocalEvents")
-                        .HasForeignKey("AdministratorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AdministratorId");
 
                     b.HasOne("noberto.mealControl.Core.Entities.ScheduleEvent", "ScheduleEvent")
                         .WithMany("ScheduleLocalEvents")

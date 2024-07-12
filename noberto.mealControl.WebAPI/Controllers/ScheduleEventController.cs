@@ -9,7 +9,6 @@ namespace noberto.mealControl.WebAPI.Controllers;
 public class ScheduleEventController : ControllerBase
 {
     private readonly IScheduleEventService _service;
-
     public ScheduleEventController(IScheduleEventService service)
     {
         _service = service;

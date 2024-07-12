@@ -4,7 +4,7 @@ namespace noberto.mealControl.Application.DTOs.ScheduleEventDTO;
 
 public record struct CreateScheduleEventDTO(
     [Required(ErrorMessage = "O ID do Administrador é obrigatório.")]
-    Guid AdministratorId,
+    Guid? AdministratorId,
 
     [Required(ErrorMessage = "A Data da Refeição é obrigatória.")]
     DateOnly MealDate,
@@ -12,7 +12,7 @@ public record struct CreateScheduleEventDTO(
     [Required(ErrorMessage = "A Descrição é obrigatória.")]
     [MinLength(5, ErrorMessage = "Descrição invalida, a quantidade miníma de caracteres são 5.")]
     [MaxLength(100, ErrorMessage = "Descrição invalida, a quantidade maxíma de caracteres são 100.")]
-    string Description,
+    string? Description,
 
     IEnumerable<string>? Citys,
 

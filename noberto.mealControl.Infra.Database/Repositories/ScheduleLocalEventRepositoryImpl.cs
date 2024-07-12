@@ -1,4 +1,5 @@
-﻿using noberto.mealControl.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 using noberto.mealControl.Infra.Database.Context;
 
@@ -18,5 +19,27 @@ public class ScheduleLocalEventRepositoryImpl : IScheduleLocalEventRepository
         await _context.AddAsync(scheduleLocalEvent);
         await _context.SaveChangesAsync();
         return scheduleLocalEvent;
+    }
+
+    public async Task<ICollection<ScheduleLocalEvent>> GetScheduleLocalEventByDate(DateOnly date)
+    {
+        return await _context.ScheduleLocalEvents
+            .Where(schedule => schedule.ScheduleEvent.MealDate == date)
+            .ToListAsync();
+    }
+
+    public async Task<ICollection<ScheduleLocalEvent>> GetScheduleLocalEventByIdAndDateAndDayAtypical(Guid workId, DateOnly mealDate, bool atypicalDay)
+    {
+        return await _context.ScheduleLocalEvents
+            .Where(schedule => schedule.WorkId == workId
+            && schedule.ScheduleEvent.MealDate == mealDate
+            && schedule.ScheduleEvent.Atypical == true)
+            .ToListAsync(); ;
+    }
+
+    public async Task<ScheduleLocalEvent?> GetScheduleLocalEventByWorkId(Guid workId)
+    {
+        return await _context.ScheduleLocalEvents
+            .FirstOrDefaultAsync(schedule => schedule.WorkId == workId);
     }
 }

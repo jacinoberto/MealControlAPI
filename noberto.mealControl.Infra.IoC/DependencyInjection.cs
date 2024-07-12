@@ -1,6 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingDateToWork;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingDateToWork.Impl;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingDateToWork;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingDateToWork.Impl;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate;
+using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate.Impl;
+using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate;
+using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate.Impl;
+using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks;
+using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks.Impl;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend.Impl;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
 using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Mappings;
 using noberto.mealControl.Application.Services;
@@ -48,6 +62,14 @@ public static class DependencyInjection
         services.AddScoped<IScheduleEventService, ScheduleEventServiceImpl>();
         services.AddScoped<IScheduleLocalEventService, ScheduleLocalEventServiceImpl>();
         //services.AddScoped<IMealService, MealServiceImpl>();
+        services.AddScoped<IFilterWorks, FilterWorks>();
+        services.AddScoped<IValidateWeekendStrategy, Weekend>();
+        services.AddScoped<IValidateWeekendStrategy, MidWeek>();
+        services.AddScoped<IAssingPendingWorksToDate, AssingPendingWorksToDate>();
+        services.AddScoped<IValidateWorkOnLocalEventScheduling, ValidateWorkOnLocalEventScheduling>();
+        services.AddScoped<IAssingPendingDateToWork, AssingPendingDateToWork>();
+        services.AddScoped<IAssingDateToWork, AssingDateToWork>();
+        services.AddScoped<IRegisterMealDate, RegisterMealDate>();
 
         //Registrando validações dos dados quando cadastrados
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminEmailError>();

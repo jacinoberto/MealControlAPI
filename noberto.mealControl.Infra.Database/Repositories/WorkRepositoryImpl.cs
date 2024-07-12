@@ -81,4 +81,11 @@ public class WorkRepositoryImpl : IWorkRepository
 
         return works.Count != 0 ? works : await _context.Works.ToArrayAsync();
     }
+
+    public async Task<ICollection<Work>> GetAllWorksAsync()
+    {
+        return await _context.Works
+            .Where(work => work.ClosingDate == null)
+            .ToListAsync();
+    }
 }

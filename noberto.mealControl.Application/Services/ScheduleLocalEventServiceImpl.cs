@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using noberto.mealControl.Application.CQRS.ScheduleLocalEventCQRS.Commands;
+using noberto.mealControl.Application.CQRS.ScheduleLocalEventCQRS.Queries;
 using noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
 using noberto.mealControl.Application.Interfaces;
 
@@ -16,9 +18,22 @@ public class ScheduleLocalEventServiceImpl : IScheduleLocalEventService
         _mediator = mediator;
     }
 
-    public async Task CreateScheduleLocalEventAsync(CreateScheduleLocalEventDTO scheduleLocalEventDto)
+    public async Task<ReturnScheduleLocalEventDTO> CreateScheduleLocalEventAsync(CreateScheduleLocalEventDTO scheduleLocalEventDto)
     {
-        var scheduleLocalEvent = _mapper.Map<CreateScheduleLocalEventDTO>(scheduleLocalEventDto);
-        await _mediator.Send(scheduleLocalEvent);
+        var scheduleLocalEvent = _mapper.Map<CreateScheduleLocalEventCommand>(scheduleLocalEventDto);
+        return _mapper.Map<ReturnScheduleLocalEventDTO>(await _mediator.Send(scheduleLocalEvent));
+    }
+
+    public async Task<ICollection<ReturnScheduleLocalEventDTO>> GetScheduleLocalEventByDateAsync(DateOnly date)
+    {
+        var scheduleLocalEvent = new GetScheduleLocalEventByDateQuery(date);
+        return _mapper.Map<ICollection<ReturnScheduleLocalEventDTO>>(
+            await _mediator.Send(scheduleLocalEvent));
+    }
+
+    public async Task<ICollection<ReturnScheduleLocalEventDTO>> GetScheduleLocalEventByWorkIdAndMealDateAndAtypicalAsync(Guid workId, DateOnly mealDate, bool atypical)
+    {
+        return _mapper.Map<ICollection<ReturnScheduleLocalEventDTO>>(
+            await _mediator.Send(new GetSchduleLocalEventByWorkIdAndMealDateAndAtypicalQuery(workId, mealDate, atypical)));
     }
 }

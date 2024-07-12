@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using noberto.mealControl.Application.CQRS.ScheduleEventCQRS.Commands;
+using noberto.mealControl.Application.CQRS.ScheduleEventCQRS.Queries;
 using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
 using noberto.mealControl.Application.Interfaces;
+using noberto.mealControl.Core.Entities;
 
 namespace noberto.mealControl.Application.Services;
 
@@ -17,9 +19,17 @@ public class ScheduleEventServiceImpl : IScheduleEventService
         _mediator = mediator;
     }
 
-    public async Task CreateScheduleEventAsync(CreateScheduleEventDTO scheduleEventDto)
+    public async Task<ReturnScheduleEventDTO> CreateScheduleEventAsync(CreateScheduleEventDTO scheduleEventDto)
     {
         var scheduleEvent = _mapper.Map<CreateScheduleEventCommand>(scheduleEventDto);
-        await _mediator.Send(scheduleEvent);
+        return _mapper.Map<ReturnScheduleEventDTO>(await _mediator.Send(scheduleEvent));
+    }
+
+    public async Task<ReturnScheduleEventDTO?> GetScheduleEventByDateAsync(DateOnly date)
+    {
+        var schedule = _mapper.Map<ReturnScheduleEventDTO>(await _mediator.Send(
+            new GetScheduleEventByDateQuery(date)));
+        return schedule is not null ? schedule
+            : null;
     }
 }

@@ -1,4 +1,5 @@
-﻿using noberto.mealControl.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 using noberto.mealControl.Infra.Database.Context;
 
@@ -18,5 +19,10 @@ public class ScheduleEventRepositoryImpl : IScheduleEventRepository
         await _context.AddAsync(scheduleEvent);
         await _context.SaveChangesAsync();
         return scheduleEvent;
+    }
+
+    public async Task<ScheduleEvent?> GetScheduleEventbyDateAsync(DateOnly date)
+    {
+        return await _context.ScheduleEvents.FirstOrDefaultAsync(schedule => schedule.MealDate == date);
     }
 }

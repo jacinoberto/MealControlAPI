@@ -33,8 +33,7 @@ public class ScheduleEventConfiguration : IEntityTypeConfiguration<ScheduleEvent
             .IsRequired();
 
         builder.Property(scheduleEvent => scheduleEvent.AdministratorId)
-            .HasColumnName("administrator_id")
-            .IsRequired();
+            .HasColumnName("administrator_id");
 
         // Relacionamento
         builder.HasOne(ScheduleEvent => ScheduleEvent.Administrator)

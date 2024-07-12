@@ -94,7 +94,13 @@ public class DomainToDtoProfile : Profile
         CreateMap<ScheduleEvent, CreateScheduleEventDTO>()
             .ReverseMap();
 
+        CreateMap<ScheduleEvent, ReturnScheduleEventDTO>()
+            .ReverseMap();
+
         CreateMap<ScheduleLocalEvent, CreateScheduleLocalEventDTO>()
+            .ReverseMap();
+
+        CreateMap<ScheduleLocalEvent, ReturnScheduleLocalEventDTO>()
             .ReverseMap();
 
         CreateMap<Meal, CreateMealDTO>()
