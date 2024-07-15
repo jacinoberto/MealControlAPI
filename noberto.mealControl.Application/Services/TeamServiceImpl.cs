@@ -35,4 +35,10 @@ public class TeamServiceImpl : ITeamService
         var team = new DisableTeamCommand(teamId);
         await _mediator.Send(team);
     }
+
+    public async Task<IEnumerable<ReturnTeamWorkDTO>> GetAllTeamsAsync()
+    {
+        return _mapper.Map <IEnumerable<ReturnTeamWorkDTO>>(
+            await _mediator.Send(new GetAllTeamsQuery()));
+    }
 }

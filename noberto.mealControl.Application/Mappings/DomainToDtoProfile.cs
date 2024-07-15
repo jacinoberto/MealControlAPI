@@ -70,6 +70,9 @@ public class DomainToDtoProfile : Profile
             option => option.MapFrom(work => work.Address))
             .ReverseMap();
 
+        CreateMap<Work, ReturnWorkDTO>()
+            .ReverseMap();
+
         CreateMap<Work, WorkSelectDTO>()
             .ForMember(workDto => workDto.Address,
             option => option.MapFrom(work => work.Address))
@@ -91,6 +94,11 @@ public class DomainToDtoProfile : Profile
             option => option.MapFrom(team => team.Worker))
             .ReverseMap();
 
+        CreateMap<Team, ReturnTeamWorkDTO>()
+            .ForMember(teamDto => teamDto.Work,
+            option => option.MapFrom(team => team.TeamManagement.Work))
+            .ReverseMap();
+
         CreateMap<ScheduleEvent, CreateScheduleEventDTO>()
             .ReverseMap();
 
@@ -101,6 +109,11 @@ public class DomainToDtoProfile : Profile
             .ReverseMap();
 
         CreateMap<ScheduleLocalEvent, ReturnScheduleLocalEventDTO>()
+            .ForMember(scheduleDto => scheduleDto.Work,
+            option => option.MapFrom(schedule => schedule.Work))
+            .ReverseMap()
+            .ForMember(schedule => schedule.ScheduleEvent,
+            option => option.MapFrom(scheduleDto => scheduleDto.ScheduleEvent))
             .ReverseMap();
 
         CreateMap<Meal, CreateMealDTO>()

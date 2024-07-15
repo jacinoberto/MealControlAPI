@@ -7,10 +7,14 @@ using noberto.mealControl.Application.BackgroundService.Services.MealDate.Pendin
 using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingDateToWork.Impl;
 using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate;
 using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate.Impl;
+using noberto.mealControl.Application.BackgroundService.Services.OpenCalendar;
+using noberto.mealControl.Application.BackgroundService.Services.OpenCalendar.Impl;
 using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate;
 using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate.Impl;
 using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks;
 using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks.Impl;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateAtypicalDay;
+using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateAtypicalDay.Impl;
 using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend;
 using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend.Impl;
 using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling;
@@ -53,6 +57,7 @@ public static class DependencyInjection
         services.AddScoped<IScheduleLocalEventRepository, ScheduleLocalEventRepositoryImpl>();
         services.AddScoped<IMealRepository, MealRepositoryImpl>();
 
+        // Registrando Serviços
         services.AddScoped<IAdministratorService, AdministratorServiceImpl>();
         services.AddScoped<IManagerService, ManagerServiceImpl>();
         services.AddScoped<IWorkerService, WorkerServiceImpl>();
@@ -61,7 +66,10 @@ public static class DependencyInjection
         services.AddScoped<ITeamService, TeamServiceImpl>();
         services.AddScoped<IScheduleEventService, ScheduleEventServiceImpl>();
         services.AddScoped<IScheduleLocalEventService, ScheduleLocalEventServiceImpl>();
-        //services.AddScoped<IMealService, MealServiceImpl>();
+        services.AddScoped<IMealService, MealServiceImpl>();
+
+
+        //Registrando validações dos dados quando cadastrados
         services.AddScoped<IFilterWorks, FilterWorks>();
         services.AddScoped<IValidateWeekendStrategy, Weekend>();
         services.AddScoped<IValidateWeekendStrategy, MidWeek>();
@@ -70,8 +78,10 @@ public static class DependencyInjection
         services.AddScoped<IAssingPendingDateToWork, AssingPendingDateToWork>();
         services.AddScoped<IAssingDateToWork, AssingDateToWork>();
         services.AddScoped<IRegisterMealDate, RegisterMealDate>();
+        services.AddScoped<IValidateAtypicalDayStrategy, AtypicalDay>();
+        services.AddScoped<IValidateAtypicalDayStrategy, NotAtypicalDay>();
+        services.AddScoped<IOpenCalendar, OpenCalendar>();
 
-        //Registrando validações dos dados quando cadastrados
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminEmailError>();
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminRegistrationError>();
         services.AddScoped<IValidateStrategy<Manager>, DuplicateManagerEmailError>();

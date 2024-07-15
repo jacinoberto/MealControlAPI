@@ -8,11 +8,16 @@ public class CreateMealCommand : IRequest<Meal>
     public bool Coffe { get; set; }
     public bool Lunch { get; set; }
     public bool Dinner { get; set; }
-    public Guid AdministratorId { get; set; }
+    public Guid? AdministratorId { get; set; }
     public Guid TeamId { get; set; }
     public Guid ScheduleLocalEventId { get; set; }
 
-    public CreateMealCommand(bool coffe, bool lunch, bool dinner, Guid administratorId,
+    public CreateMealCommand()
+    {
+        
+    }
+
+    public CreateMealCommand(bool coffe, bool lunch, bool dinner, Guid? administratorId,
         Guid teamId, Guid scheduleLocalEventId)
     {
         Coffe = coffe;

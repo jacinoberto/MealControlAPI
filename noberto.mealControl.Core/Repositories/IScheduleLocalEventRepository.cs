@@ -8,4 +8,5 @@ public interface IScheduleLocalEventRepository
     Task<ICollection<ScheduleLocalEvent>> GetScheduleLocalEventByDate(DateOnly date);
     Task<ScheduleLocalEvent> GetScheduleLocalEventByWorkId(Guid workId);
     Task<ICollection<ScheduleLocalEvent>> GetScheduleLocalEventByIdAndDateAndDayAtypical(Guid workId, DateOnly mealDate, bool atypicalDay);
+    Task<IEnumerable<ScheduleLocalEvent>> GetScheduleLocalEventsByDay();
 }

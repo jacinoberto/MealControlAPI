@@ -31,6 +31,12 @@ public class ScheduleLocalEventServiceImpl : IScheduleLocalEventService
             await _mediator.Send(scheduleLocalEvent));
     }
 
+    public async Task<IEnumerable<ReturnScheduleLocalEventDTO>> GetScheduleLocalEventByDay()
+    {
+        return _mapper.Map<IEnumerable<ReturnScheduleLocalEventDTO>>(
+            await _mediator.Send(new GetScheduleLocalEventByDayQuery()));
+    }
+
     public async Task<ICollection<ReturnScheduleLocalEventDTO>> GetScheduleLocalEventByWorkIdAndMealDateAndAtypicalAsync(Guid workId, DateOnly mealDate, bool atypical)
     {
         return _mapper.Map<ICollection<ReturnScheduleLocalEventDTO>>(

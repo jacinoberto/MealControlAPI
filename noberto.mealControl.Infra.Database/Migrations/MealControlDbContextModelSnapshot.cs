@@ -361,7 +361,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("noberto.mealControl.Core.Entity.User", "User", b1 =>
+                    b.OwnsOne("noberto.mealControl.Core.Entities.Administrator.User#noberto.mealControl.Core.Entity.User", "User", b1 =>
                         {
                             b1.Property<Guid>("AdministratorId")
                                 .HasColumnType("uuid");
@@ -401,7 +401,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                             b1.HasIndex("Registration")
                                 .IsUnique();
 
-                            b1.ToTable("tb_administrators");
+                            b1.ToTable("tb_administrators", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AdministratorId");
@@ -421,7 +421,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("noberto.mealControl.Core.Entity.User", "User", b1 =>
+                    b.OwnsOne("noberto.mealControl.Core.Entities.Manager.User#noberto.mealControl.Core.Entity.User", "User", b1 =>
                         {
                             b1.Property<Guid>("ManagerId")
                                 .HasColumnType("uuid");
@@ -461,7 +461,7 @@ namespace noberto.mealControl.Infra.Database.Migrations
                             b1.HasIndex("Registration")
                                 .IsUnique();
 
-                            b1.ToTable("tb_managers");
+                            b1.ToTable("tb_managers", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ManagerId");

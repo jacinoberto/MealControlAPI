@@ -87,5 +87,10 @@ public class TeamRepositoryImpl : ITeamRepository
         return team;
     }
 
-    
+    public async Task<IEnumerable<Team>> GetAllTeams()
+    {
+        return await _context.Teams
+            .Include(team => team.TeamManagement.Work)
+            .ToListAsync();
+    }
 }

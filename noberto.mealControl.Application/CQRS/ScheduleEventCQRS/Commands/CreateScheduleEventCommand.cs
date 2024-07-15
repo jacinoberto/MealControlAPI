@@ -11,6 +11,11 @@ public class CreateScheduleEventCommand : IRequest<ScheduleEvent>
     public bool Atypical { get; set; }
     public Guid? AdministratorId { get; set; }
 
+    public CreateScheduleEventCommand()
+    {
+        
+    }
+
     public CreateScheduleEventCommand(DateOnly mealDate, string? description,
         IEnumerable<string>? citys, bool atypical, Guid? administratorId)
     {

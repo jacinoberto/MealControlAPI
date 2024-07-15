@@ -6,6 +6,7 @@ public interface ITeamRepository
 {
     Task<Team> CreateTeamAsync(Team team);
     Task<Team> GetTeamByIdAsync(Guid teamId);
+    Task<IEnumerable<Team>> GetAllTeams();
     Task<IEnumerable<Team>> GetTeamsByWorkerIdAsync(Guid workerId);
     Task<IEnumerable<Team>> GetTeamsByIdManagerAsync(Guid managerId);
     Task<IEnumerable<Team>> GetTeamsByManagerIdAsync(Guid managerId);

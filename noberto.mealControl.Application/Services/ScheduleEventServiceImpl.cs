@@ -32,4 +32,10 @@ public class ScheduleEventServiceImpl : IScheduleEventService
         return schedule is not null ? schedule
             : null;
     }
+
+    public async Task<ReturnScheduleEventDTO> GetScheduleEventByIdAsync(Guid scheduleEventId)
+    {
+        return _mapper.Map<ReturnScheduleEventDTO>(
+            await _mediator.Send(new GetScheduleEventByIdQuery(scheduleEventId)));
+    }
 }

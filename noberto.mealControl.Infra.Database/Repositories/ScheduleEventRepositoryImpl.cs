@@ -25,4 +25,10 @@ public class ScheduleEventRepositoryImpl : IScheduleEventRepository
     {
         return await _context.ScheduleEvents.FirstOrDefaultAsync(schedule => schedule.MealDate == date);
     }
+
+    public async Task<ScheduleEvent> GetScheduleEventbyIdAsync(Guid scheduleEventId)
+    {
+        return await _context.ScheduleEvents
+            .FirstOrDefaultAsync(schedule => schedule.Id == scheduleEventId);
+    }
 }

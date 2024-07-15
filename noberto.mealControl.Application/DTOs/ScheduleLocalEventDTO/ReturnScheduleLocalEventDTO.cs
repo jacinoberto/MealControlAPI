@@ -1,8 +1,13 @@
-﻿namespace noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
+﻿using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
+using noberto.mealControl.Application.DTOs.WorkDTO;
 
-public record struct ReturnScheduleLocalEventDTO(
+namespace noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
+
+public record ReturnScheduleLocalEventDTO(
     Guid Id,
     Guid AdministratorId,
     Guid ScheduleEventId,
-    Guid WorkId
+    Guid WorkId,
+    ReturnWorkDTO Work,
+    ReturnScheduleEventDTO ScheduleEvent
     );

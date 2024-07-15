@@ -16,6 +16,10 @@ public class Meal : Identifier
     public Team Team { get; private set; }
     public ScheduleLocalEvent ScheduleLocalEvent { get; set; }
 
+    public Meal()
+    {
+        
+    }
     public Meal(bool coffe, bool lunch, bool dinner)
     {
         ValidateMealData(coffe, lunch, dinner);

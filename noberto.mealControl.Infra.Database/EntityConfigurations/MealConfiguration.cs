@@ -34,8 +34,7 @@ public class MealConfiguration : IEntityTypeConfiguration<Meal>
             .IsRequired();
 
         builder.Property(meal => meal.AdministratorId)
-            .HasColumnName("administrator_id")
-            .IsRequired();
+            .HasColumnName("administrator_id");
 
         builder.Property(meal => meal.TeamId)
             .HasColumnName("team_id")

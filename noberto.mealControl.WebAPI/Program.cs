@@ -20,6 +20,15 @@ builder.Services.AddSwaggerGen(swagger =>
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+{
+    policy.WithOrigins("http://localhost:4200");
+    policy.AllowAnyMethod();
+    policy.AllowAnyHeader();
+    policy.AllowCredentials();
+    policy.SetIsOriginAllowed(_ => true);
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
