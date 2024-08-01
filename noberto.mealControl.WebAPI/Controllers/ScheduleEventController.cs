@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using noberto.mealControl.Application.BackgroundService.Services.OpenCalendar;
+using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate;
 using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
 using noberto.mealControl.Application.Interfaces;
+using noberto.mealControl.Core.Repositories;
 
 namespace noberto.mealControl.WebAPI.Controllers;
 
@@ -11,10 +14,12 @@ public class ScheduleEventController : ControllerBase
 {
     private readonly IScheduleEventService _service;
     private readonly IOpenCalendar openCalendar;
-    public ScheduleEventController(IScheduleEventService service,IOpenCalendar openCalendar)
+    private readonly IRegisterMealDate registerMealDate;
+    public ScheduleEventController(IScheduleEventService service, IOpenCalendar openCalendar, IRegisterMealDate registerMealDate)
     {
         _service = service;
         this.openCalendar = openCalendar;
+        this.registerMealDate = registerMealDate;
     }
 
     /// <summary>
@@ -36,7 +41,14 @@ public class ScheduleEventController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Teste()
     {
+        //await register.Register();
+        //var teste = new Meal(dto.Coffe, dto.Launch, dto.Dinner);
+        //teste.AdministratorId = dto.AdministratorId;
+        //teste.TeamId = dto.TeamId;
+        //teste.ShecheduleLocalEventId = dto.ScheduleLocalEventId;
         await openCalendar.Open();
+        //await registerMealDate.Register();
+        //await re.CreateMealAsync(teste);
         return StatusCode(201);
     }
 }

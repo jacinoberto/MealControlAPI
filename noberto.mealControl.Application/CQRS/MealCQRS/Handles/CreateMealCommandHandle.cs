@@ -21,7 +21,11 @@ public class CreateMealCommandHandle
 
     public async Task<Meal> Handle(CreateMealCommand request, CancellationToken cancellationToken)
     {
-        var meal = _mapper.Map<Meal>(request);
+        var meal = new Meal(request.Coffe, request.Lunch, request.Dinner);
+        meal.TeamId = request.TeamId;
+        meal.AdministratorId = request.AdministratorId;
+        meal.ShecheduleLocalEventId = request.ScheduleLocalEventId;
+
         return await _repository.CreateMealAsync(meal);
     }
 }

@@ -35,6 +35,11 @@ public class WorkServiceImpl : IWorkService
     {
         var work = new FinishWorkCommand(workId);
         await _mediator.Send(work);
-    }    
+    }
 
+    public async Task<IEnumerable<ReturnWorkDTO>> GetAllWorkAsync()
+    {
+        return _mapper.Map<IEnumerable<ReturnWorkDTO>>(
+            await _mediator.Send(new GetAllWorksQuery()));
+    }
 }

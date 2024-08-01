@@ -80,5 +80,10 @@ public class TeamManagementRepositoryImpl : ITeamManagementRepository
         return teamManagement;
     }
 
-    
+    public async Task<IEnumerable<TeamManagement>> GetAllTeamManagementAsync()
+    {
+        return await _context.TeamManagement
+            .Where(team => team.ActiveTeam == true)
+            .ToListAsync();
+    }
 }

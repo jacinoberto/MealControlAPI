@@ -24,6 +24,12 @@ public class TeamServiceImpl : ITeamService
         await _mediator.Send(team);
     }
 
+    public async Task<ReturnTeamDTO> GetTeamByIdAsync(Guid teamId)
+    {
+        return _mapper.Map<ReturnTeamDTO>(
+            await _mediator.Send(new GetTeamByIdQuery(teamId)));
+    }
+
     public async Task<IEnumerable<ReturnTeamWorkerDTO>> GetTeamByManagerIdAsync(Guid managerId)
     {
         var team = new GetTeamByManagerIdQuery(managerId);
@@ -36,9 +42,9 @@ public class TeamServiceImpl : ITeamService
         await _mediator.Send(team);
     }
 
-    public async Task<IEnumerable<ReturnTeamWorkDTO>> GetAllTeamsAsync()
+    public async Task<IEnumerable<ReturnTeamDTO>> GetAllTeamsAsync()
     {
-        return _mapper.Map <IEnumerable<ReturnTeamWorkDTO>>(
+        return _mapper.Map <IEnumerable<ReturnTeamDTO>>(
             await _mediator.Send(new GetAllTeamsQuery()));
     }
 }

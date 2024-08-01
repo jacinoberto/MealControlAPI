@@ -6,6 +6,7 @@ public interface ITeamManagementRepository
 {
     Task<TeamManagement> CreateTeamManagementAsync(TeamManagement teamManagement);
     Task<TeamManagement> GetTeamManagementByIdAsync(Guid teamManagementId);
+    Task<IEnumerable<TeamManagement>> GetAllTeamManagementAsync();
     Task<IEnumerable<TeamManagement>> GetTeamManagementByManagerIdAsync(Guid managerId);
     Task<IEnumerable<TeamManagement>> GetTeamManagementByWorkIdAsync(Guid workId);
     Task<IEnumerable<TeamManagement>> GetTeamManagementByStateAsync(string state);

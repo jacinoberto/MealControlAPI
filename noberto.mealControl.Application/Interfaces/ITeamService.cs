@@ -6,7 +6,8 @@ namespace noberto.mealControl.Application.Interfaces;
 public interface ITeamService
 {
     Task CreateTeamAsync(CreateTeamDTO teamDTO);
-    Task<IEnumerable<ReturnTeamWorkDTO>> GetAllTeamsAsync();
+    Task<ReturnTeamDTO> GetTeamByIdAsync(Guid teamId);
+    Task<IEnumerable<ReturnTeamDTO>> GetAllTeamsAsync();
     Task<IEnumerable<ReturnTeamWorkerDTO>> GetTeamByManagerIdAsync(Guid managerId);
     Task DisableTeamAsync(Guid teamId);
 }

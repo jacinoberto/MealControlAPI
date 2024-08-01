@@ -7,6 +7,7 @@ using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
 using noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
 using noberto.mealControl.Application.DTOs.TeamDTO;
 using noberto.mealControl.Application.DTOs.TeamManagement;
+using noberto.mealControl.Application.DTOs.TeamManagementDTO;
 using noberto.mealControl.Application.DTOs.UserDTO;
 using noberto.mealControl.Application.DTOs.WorkDTO;
 using noberto.mealControl.Application.DTOs.WorkerDTO;
@@ -81,12 +82,20 @@ public class DomainToDtoProfile : Profile
         CreateMap<TeamManagement, CreateTeamManagementDTO>()
             .ReverseMap();
 
+        CreateMap<TeamManagement, ReturnTeamManagementDTO>()
+            .ReverseMap();
+
         CreateMap<TeamManagement, TeamManagementSelectDTO>()
             .ForMember(teamManagementDto => teamManagementDto.Manager,
             option => option.MapFrom(teamManagement => teamManagement.Manager))
             .ReverseMap();
 
         CreateMap<Team, CreateTeamDTO>()
+            .ReverseMap();
+
+        CreateMap<Team, ReturnTeamDTO>()
+            .ForMember(teamDto => teamDto.TeamManagement,
+            option => option.MapFrom(team => team.TeamManagement))
             .ReverseMap();
 
         CreateMap<Team, ReturnTeamWorkerDTO>()

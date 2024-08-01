@@ -1,41 +1,29 @@
-﻿using AutoMapper;
-using noberto.mealControl.Application.DTOs.MealDTO;
+﻿using noberto.mealControl.Application.DTOs.MealDTO;
+using noberto.mealControl.Application.DTOs.ScheduleEventDTO;
 using noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
+using noberto.mealControl.Application.DTOs.TeamDTO;
 using noberto.mealControl.Application.Interfaces;
-using noberto.mealControl.Core.Entities;
-using noberto.mealControl.Core.Repositories;
 
 namespace noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateAtypicalDay.Impl;
 
 public class NotAtypicalDay : IValidateAtypicalDayStrategy
 {
-    private readonly IScheduleEventService _scheduleEventService;
     private readonly IMealService _mealService;
-    private readonly IMealRepository _mealRepository;
-    private readonly IMapper _mapper;
 
-    public NotAtypicalDay(IScheduleEventService scheduleEventService, IMealService mealService, IMealRepository mealRepository, IMapper mapper)
+    public NotAtypicalDay(IMealService mealService)
     {
-        _scheduleEventService = scheduleEventService;
         _mealService = mealService;
-        _mealRepository = mealRepository;
-        _mapper = mapper;
     }
 
-    public async Task<CreateMealDTO> Validate(Guid teamId, Guid scheduleEventId, Guid scheduleLocalEvent)
+    public async Task Validate(ReturnTeamDTO team, ReturnScheduleEventDTO scheduleEvent, ReturnScheduleLocalEventDTO scheduleLocalEvent)
     {
-        var meal = new CreateMealDTO();
-        var scheduleEvent = await _scheduleEventService.GetScheduleEventByIdAsync(scheduleEventId);
-
-        if (!scheduleEvent.Atypical)
+        if (!scheduleEvent.Atypical
+            && scheduleLocalEvent.WorkId == team.TeamManagement.WorkId)
         {
-            meal = new(true, true, true, null, teamId,
-                scheduleLocalEvent);
+            CreateMealDTO meal = new(true, true, true, team.AdministratorId, team.Id,
+                scheduleLocalEvent.Id);
 
-            //await _mealService.CreateMealAsync(meal);
-            await _mealRepository.CreateMealAsync(_mapper.Map<Meal>(meal));
+            await _mealService.CreateMealAsync(meal);
         }
-
-        return meal;
     }
 }

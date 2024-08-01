@@ -48,6 +48,7 @@ public class ScheduleLocalEventRepositoryImpl : IScheduleLocalEventRepository
         return await _context.ScheduleLocalEvents
             .Where(schedule => schedule.ScheduleEvent.MealDate > DateOnly.FromDateTime(DateTime.Today)
             && schedule.ScheduleEvent.MealDate < schedule.ScheduleEvent.MealDate.AddDays(7))
+            .Include(schedule => schedule.ScheduleEvent)
             .Include(schedule => schedule.Work)
             .ToListAsync();
     }

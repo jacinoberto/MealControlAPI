@@ -1,23 +1,24 @@
 ﻿using MediatR;
 using noberto.mealControl.Application.CQRS.ScheduleLocalEventCQRS.Commands;
+using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Core.Repositories;
 
 namespace noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
 
 public class ValidateWorkOnLocalEventScheduling : IValidateWorkOnLocalEventScheduling
 {
-    private readonly IWorkRepository _workRepository;
+    private readonly IWorkService _service;
     private readonly IMediator _mediator;
 
-    public ValidateWorkOnLocalEventScheduling(IWorkRepository workRepository, IMediator mediator)
+    public ValidateWorkOnLocalEventScheduling(IMediator mediator, IWorkService service)
     {
-        _workRepository = workRepository;
         _mediator = mediator;
+        _service = service;
     }
 
     public async Task Validate(Guid scheduleEventId)
     {
-        var works = await _workRepository.GetAllWorksAsync();
+        var works = await _service.GetAllWorkAsync();
 
         foreach (var work in works)
         {

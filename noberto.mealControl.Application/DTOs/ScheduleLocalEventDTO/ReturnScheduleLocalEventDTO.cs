@@ -5,7 +5,7 @@ namespace noberto.mealControl.Application.DTOs.ScheduleLocalEventDTO;
 
 public record ReturnScheduleLocalEventDTO(
     Guid Id,
-    Guid AdministratorId,
+    Guid? AdministratorId,
     Guid ScheduleEventId,
     Guid WorkId,
     ReturnWorkDTO Work,

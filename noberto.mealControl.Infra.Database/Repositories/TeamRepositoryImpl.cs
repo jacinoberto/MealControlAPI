@@ -90,6 +90,7 @@ public class TeamRepositoryImpl : ITeamRepository
     public async Task<IEnumerable<Team>> GetAllTeams()
     {
         return await _context.Teams
+            .Where(team => team.ActiveTeam == true)
             .Include(team => team.TeamManagement.Work)
             .ToListAsync();
     }
