@@ -1,24 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingDateToWork;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingDateToWork.Impl;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingDateToWork;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingDateToWork.Impl;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate;
-using noberto.mealControl.Application.BackgroundService.Services.MealDate.PendingWork.AssingPendingWorksToDate.Impl;
-using noberto.mealControl.Application.BackgroundService.Services.OpenCalendar;
-using noberto.mealControl.Application.BackgroundService.Services.OpenCalendar.Impl;
-using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate;
-using noberto.mealControl.Application.BackgroundService.Services.RegisterMealDate.Impl;
-using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks;
-using noberto.mealControl.Application.BackgroundService.Utils.Filters.FilterWorks.Impl;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateAtypicalDay;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateAtypicalDay.Impl;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWeekend.Impl;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling;
-using noberto.mealControl.Application.BackgroundService.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
+using noberto.mealControl.Application.Background.Services.Background;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingDateToWork;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingDateToWork.Impl;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingPendingDateToWork;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingPendingDateToWork.Impl;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingPendingWorksToDate;
+using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingPendingWorksToDate.Impl;
+using noberto.mealControl.Application.Background.Services.OpenCalendar;
+using noberto.mealControl.Application.Background.Services.OpenCalendar.Impl;
+using noberto.mealControl.Application.Background.Services.RegisterMealDate;
+using noberto.mealControl.Application.Background.Services.RegisterMealDate.Impl;
+using noberto.mealControl.Application.Background.Utils.Filters.FilterWorks;
+using noberto.mealControl.Application.Background.Utils.Filters.FilterWorks.Impl;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateAtypicalDay;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateAtypicalDay.Impl;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateDayAndHours;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateDayAndHours.Impl;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateWeekend;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateWeekend.Impl;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling;
+using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
 using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Mappings;
 using noberto.mealControl.Application.Services;
@@ -67,6 +70,7 @@ public static class DependencyInjection
         services.AddScoped<IScheduleEventService, ScheduleEventServiceImpl>();
         services.AddScoped<IScheduleLocalEventService, ScheduleLocalEventServiceImpl>();
         services.AddScoped<IMealService, MealServiceImpl>();
+        services.AddHostedService<WorkService>();
 
 
         //Registrando validações dos dados quando cadastrados
@@ -77,10 +81,12 @@ public static class DependencyInjection
         services.AddScoped<IValidateWorkOnLocalEventScheduling, ValidateWorkOnLocalEventScheduling>();
         services.AddScoped<IAssingPendingDateToWork, AssingPendingDateToWork>();
         services.AddScoped<IAssingDateToWork, AssingDateToWork>();
-        services.AddScoped<IRegisterMealDate, RegisterMealDate>();
+        services.AddScoped<IRegisterMealDate, RegisterMealDateImpl>();
+        services.AddScoped<RegisterMealDateImpl>();
+        services.AddScoped<OpenCalendarImpl>();
         services.AddScoped<IValidateAtypicalDayStrategy, AtypicalDay>();
         services.AddScoped<IValidateAtypicalDayStrategy, NotAtypicalDay>();
-        services.AddScoped<IOpenCalendar, OpenCalendar>();
+        services.AddScoped<IOpenCalendar, OpenCalendarImpl>();
 
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminEmailError>();
         services.AddScoped<IValidateStrategy<Administrator>, DuplicateAdminRegistrationError>();
@@ -90,6 +96,7 @@ public static class DependencyInjection
         services.AddScoped<IValidateStrategy<Work>, DuplicateWorkIdentificationError>();
         services.AddScoped<IValidateStrategy<TeamManagement>, DuplicateTeamManagementSectorError>();
         services.AddScoped<IValidateStrategy<TeamManagement>, DuplicateTeamManagementWorkError>();
+        services.AddTransient<IValidateDayAndHours, ValidateDayAndHoursImpl>();
 
         return services;
     }

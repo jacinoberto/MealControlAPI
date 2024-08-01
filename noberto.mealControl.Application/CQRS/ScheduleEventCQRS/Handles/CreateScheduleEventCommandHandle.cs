@@ -33,7 +33,9 @@ public class CreateScheduleEventCommandHandle
 
         foreach (var work in works)
         {
-            if (_scheduleLocalEventRepository.GetScheduleLocalEventByWorkId(work.Id) is null)
+            var r = await _scheduleLocalEventRepository.GetScheduleLocalEventByWorkId(work.Id);
+
+            if (r is null)
             {
                 var scheduleLocal = new ScheduleLocalEvent();
                 scheduleLocal.AdministratorId = request.AdministratorId;

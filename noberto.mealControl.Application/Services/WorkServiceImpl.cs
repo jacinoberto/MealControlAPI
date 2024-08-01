@@ -42,4 +42,10 @@ public class WorkServiceImpl : IWorkService
         return _mapper.Map<IEnumerable<ReturnWorkDTO>>(
             await _mediator.Send(new GetAllWorksQuery()));
     }
+
+    public async Task<ReturnWorkDTO> GetWorkByIdAsync(Guid workId)
+    {
+        return _mapper.Map<ReturnWorkDTO>(
+            await _mediator.Send(new GetWorkByIdQuery(workId)));
+    }
 }

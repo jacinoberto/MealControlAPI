@@ -37,6 +37,12 @@ public class ScheduleLocalEventRepositoryImpl : IScheduleLocalEventRepository
             .ToListAsync(); ;
     }
 
+    public async Task<ScheduleLocalEvent?> GetScheduleLocalEventByScheduleEventId(Guid scheduleEventId)
+    {
+        return await _context.ScheduleLocalEvents
+            .FirstOrDefaultAsync(scheduleLocalEvent => scheduleLocalEvent.ScheduleEventId == scheduleEventId);
+    }
+
     public async Task<ScheduleLocalEvent?> GetScheduleLocalEventByWorkId(Guid workId)
     {
         return await _context.ScheduleLocalEvents
