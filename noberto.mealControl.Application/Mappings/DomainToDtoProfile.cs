@@ -141,6 +141,15 @@ public class DomainToDtoProfile : Profile
             option => option.MapFrom(meal => meal.Team))
             .ReverseMap();
 
+        CreateMap<Meal, ReturnCoffesDTO>()
+            .ReverseMap();
+
+        CreateMap<Meal, ReturnDinnersDTO>()
+            .ReverseMap();
+
+        CreateMap<Meal, ReturnLunchesDTO>()
+            .ReverseMap();
+
         CreateMap<Meal, MealReturnForUpdate>()
             .ForMember(mealDto => mealDto.ScheduleLocalEvent,
             option => option.MapFrom(meal => meal.ScheduleLocalEvent))
