@@ -6,6 +6,7 @@ public interface IManagerRepository
 {
     Task<Manager> CreateManagerAsync(Manager manager);
     Task<Manager> GetManagerByIdAsync(Guid managerId);
+    Task<Manager> GetManagerByEmailAndPassword(string email, string password);
     Task<IEnumerable<Manager>> GetManagersByRegistrationOrNameOrEmailAsync(string registrationOrNameOrEmail, string state);
     Task<IEnumerable<Manager>> GetManagersByStateAsync(string state);
     Task<Manager> RecoverManagerPasswordAsync(Guid managerId, string password);

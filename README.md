@@ -16,6 +16,12 @@
     <li>Definir e implementar as interfaces dos serviços da aplicação ✔️</li>
 </ul>
 
+<h2><b>Camada Application Background</b></h2>
+<ul>
+    <li>Definir e implementar métodos para cadastro de datas automáticas e lançamento das refeições da semana com seu devidos filtros e validações ✔️</li>
+    <li>Implementar o WorkService para fazer a automação da abertura da agenda em segundo plano ✔️</li>
+</ul>
+
 <h2><b>Camada de infraestrutura Database</b></h2>
 <ul>
     <li>Definir o contexto da aplicação e fazer o mapeamento ORM ✔️</li>

@@ -32,6 +32,14 @@ public class ManagerRepositoryImlp : IManagerRepository
         return manager;
     }
 
+    public async Task<Manager> GetManagerByEmailAndPassword(string email, string password)
+    {
+        return await _context.Managers
+            .FirstOrDefaultAsync(manager => manager.User.Email == email
+            && manager.User.Password == password) ?? throw new EntityNotFoundException(
+                TypesNotFoundEnum.ManagerNotFoundByEmailAndPassword.ToString());
+    }
+
     public async Task<Manager> GetManagerByIdAsync(Guid managerId)
     {
         return await _context.Managers

@@ -12,6 +12,9 @@ public class TypesNotFoundEnum : Enumeration
     public static TypesNotFoundEnum ManagerNotFound =
         new("Não foi encontrado nenhum enecarregado cadastrado, ativo ou disponível para a sua região no sistema com o dado informado.");
 
+    public static TypesNotFoundEnum ManagerNotFoundByEmailAndPassword =
+        new("E-mail ou senha invalidos. Não foi encontrado nenhum Encarregado cadastrado no sistema com os dados informados.");
+
     public static TypesNotFoundEnum ManagerNotFoundForTheRegion =
         new("Nenhum encarregado encontrado. Ele pode não está cadastrado, ativo ou disponível para a sua região no sistema.");
 

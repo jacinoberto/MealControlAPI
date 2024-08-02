@@ -1,5 +1,8 @@
 ﻿namespace noberto.mealControl.Application.DTOs.MealDTO;
 
-public class UpdateMealDTO
-{
-}
+public record UpdateMealDTO(
+    Guid Id,
+    bool Coffe,
+    bool Lunch,
+    bool Dinner
+    );
