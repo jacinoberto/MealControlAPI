@@ -90,6 +90,9 @@ public class DomainToDtoProfile : Profile
         CreateMap<TeamManagement, ReturnTeamManagementDTO>()
             .ReverseMap();
 
+        CreateMap<TeamManagement, ReturnTeamManagementSectorDTO>()
+            .ReverseMap();
+
         CreateMap<TeamManagement, TeamManagementSelectDTO>()
             .ForMember(teamManagementDto => teamManagementDto.Manager,
             option => option.MapFrom(teamManagement => teamManagement.Manager))

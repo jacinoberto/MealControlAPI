@@ -46,6 +46,21 @@ public class TeamManagementController : ControllerBase
     }
 
     /// <summary>
+    /// Retorna uma lista de Equipes de um determinado Encarregado pelo ID informado.
+    /// </summary>
+    /// <param name="managerId"></param>
+    /// <returns>IActionResult</returns>
+    /// <returns code="200">Caso sejam encontradEquipes compativeis com o ID informado.</returns>
+    /// <returns code="404">Caso não sejam encontrados Equipes compativeis com o ID informado.</returns>
+    [HttpGet("{managerId}/teams")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetTeamManagementByManagerIdAsync(Guid managerId)
+    {
+        return Ok(await _service.GetTeamManagementByManagerIdAsync(managerId));
+    }
+
+    /// <summary>
     /// Inativa o Gerenciamento de Equipe.
     /// </summary>
     /// <param name="teamManagementId"></param>

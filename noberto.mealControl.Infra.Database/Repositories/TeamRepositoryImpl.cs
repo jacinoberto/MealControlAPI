@@ -47,6 +47,7 @@ public class TeamRepositoryImpl : ITeamRepository
         var teams = await _context.Teams
             .Where(team => team.TeamManagement.ManagerId == managerId
             && team.ActiveTeam == true)
+            .Include(team => team.Worker)
             .ToListAsync();
 
         return teams.Count is not 0 ? teams

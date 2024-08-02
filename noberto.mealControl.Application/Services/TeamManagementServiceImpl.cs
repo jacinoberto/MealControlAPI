@@ -3,6 +3,7 @@ using MediatR;
 using noberto.mealControl.Application.CQRS.TeamManagementCQRS.Commands;
 using noberto.mealControl.Application.CQRS.TeamManagementCQRS.Queries;
 using noberto.mealControl.Application.DTOs.TeamManagement;
+using noberto.mealControl.Application.DTOs.TeamManagementDTO;
 using noberto.mealControl.Application.Interfaces;
 
 namespace noberto.mealControl.Application.Services;
@@ -34,5 +35,11 @@ public class TeamManagementServiceImpl : ITeamManagementService
     {
         var teamManagement = new DisableTeamManagementCommand(teamManagementId);
         return _mediator.Send(teamManagement);
+    }
+
+    public async Task<IEnumerable<ReturnTeamManagementSectorDTO>> GetTeamManagementByManagerIdAsync(Guid managerId)
+    {
+        return _mapper.Map<IEnumerable<ReturnTeamManagementSectorDTO>>(
+            await _mediator.Send(new GetTeamManagementByManagerIdQuery(managerId)));
     }
 }
