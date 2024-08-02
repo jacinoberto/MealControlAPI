@@ -23,12 +23,8 @@ public class WorkService : BackgroundService
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await Console.Out.WriteLineAsync("esperando");
-
             if (_validateDayAndHours.Validate())
             {
-                await Console.Out.WriteLineAsync("Teste");
-
                 using (var scope = _serviceProvider.CreateScope())
                 {
                     var registerMealDate = scope.ServiceProvider.GetRequiredService<RegisterMealDateImpl>();
