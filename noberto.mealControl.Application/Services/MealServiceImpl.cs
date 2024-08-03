@@ -13,11 +13,11 @@ public class MealServiceImpl : IMealService
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    private readonly IValidateMeals<UpdateMealCoffeeDTO> _validateCoffee;
-    private readonly IValidateMeals<UpdateMealLunchDTO> _validateLunch;
-    private readonly IValidateMeals<UpdateMealDinnerDTO> _validateDinner;
+    private readonly IValidateMeals<UpdateMealCoffeeDTO, ReturnCoffesDTO> _validateCoffee;
+    private readonly IValidateMeals<UpdateMealLunchDTO, ReturnLunchesDTO> _validateLunch;
+    private readonly IValidateMeals<UpdateMealDinnerDTO, ReturnDinnersDTO> _validateDinner;
 
-    public MealServiceImpl(IMediator mediator, IMapper mapper, IValidateMeals<UpdateMealCoffeeDTO> validateCoffee, IValidateMeals<UpdateMealLunchDTO> validateLunch, IValidateMeals<UpdateMealDinnerDTO> validateDinner)
+    public MealServiceImpl(IMediator mediator, IMapper mapper, IValidateMeals<UpdateMealCoffeeDTO, ReturnCoffesDTO> validateCoffee, IValidateMeals<UpdateMealLunchDTO, ReturnLunchesDTO> validateLunch, IValidateMeals<UpdateMealDinnerDTO, ReturnDinnersDTO> validateDinner)
     {
         _mediator = mediator;
         _mapper = mapper;
@@ -74,19 +74,19 @@ public class MealServiceImpl : IMealService
         throw new NotImplementedException();
     }
 
-    public async Task UpdateMealCoffeeAsync(UpdateMealCoffeeDTO coffee)
+    public async Task<IEnumerable<ReturnCoffesDTO>> UpdateMealCoffeeAsync(UpdateMealCoffeeDTO coffee)
     {
-        await _validateCoffee.Validate(coffee);
+        return await _validateCoffee.Validate(coffee);
     }
 
-    public async Task UpdateMealDinnerAsync(UpdateMealDinnerDTO dinner)
+    public async Task<IEnumerable<ReturnDinnersDTO>> UpdateMealDinnerAsync(UpdateMealDinnerDTO dinner)
     {
-        await _validateDinner.Validate(dinner);
+        return await _validateDinner.Validate(dinner);
     }
 
-    public async Task UpdateMealLunchAsync(UpdateMealLunchDTO lunch)
+    public async Task<IEnumerable<ReturnLunchesDTO>> UpdateMealLunchAsync(UpdateMealLunchDTO lunch)
     {
-        await _validateLunch.Validate(lunch);
+        return await _validateLunch.Validate(lunch);
     }
 
     public Task UpdateMealsAsync(IEnumerable<UpdateMealDTO> mealsDto)

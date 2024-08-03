@@ -61,7 +61,9 @@ public class MealRepositoryImpl : IMealRepository
 
     public async Task<Meal> UpdateMealCoffeeAsync(Guid id, bool coffee)
     {
-        var meal = await _context.Meals.FindAsync(id);
+        var meal = await _context.Meals
+            .Include(meal => meal.Team.Worker)
+            .FirstOrDefaultAsync(meal => meal.Id == id);
 
         meal.UpdateCoffee(coffee);
         await _context.SaveChangesAsync();
@@ -71,7 +73,9 @@ public class MealRepositoryImpl : IMealRepository
 
     public async Task<Meal> UpdateMealDinnerAsync(Guid id, bool dinner)
     {
-        var meal = await _context.Meals.FindAsync(id);
+        var meal = await _context.Meals
+            .Include(meal => meal.Team.Worker)
+            .FirstOrDefaultAsync(meal => meal.Id == id);
 
         meal.UpdateDinner(dinner);
         await _context.SaveChangesAsync();
@@ -81,7 +85,9 @@ public class MealRepositoryImpl : IMealRepository
 
     public async Task<Meal> UpdateMealLunchAsync(Guid id, bool lunch)
     {
-        var meal = await _context.Meals.FindAsync(id);
+        var meal = await _context.Meals
+            .Include(meal => meal.Team.Worker)
+            .FirstOrDefaultAsync(meal => meal.Id == id);
 
         meal.UpdateLunch(lunch);
         await _context.SaveChangesAsync();

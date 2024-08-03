@@ -35,18 +35,4 @@ public class ScheduleEventController : ControllerBase
         await _service.CreateScheduleEventAsync(scheduleEventDTO);
         return StatusCode(201);
     }
-
-    [HttpPost]
-    public async Task<IActionResult> Teste()
-    {
-        //await register.Register();
-        //var teste = new Meal(dto.Coffe, dto.Launch, dto.Dinner);
-        //teste.AdministratorId = dto.AdministratorId;
-        //teste.TeamId = dto.TeamId;
-        //teste.ShecheduleLocalEventId = dto.ScheduleLocalEventId;
-        await registerMealDate.Register();
-        await openCalendar.Open();
-        //await re.CreateMealAsync(teste);
-        return StatusCode(201);
-    }
 }

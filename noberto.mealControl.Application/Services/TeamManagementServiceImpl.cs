@@ -43,9 +43,9 @@ public class TeamManagementServiceImpl : ITeamManagementService
             await _mediator.Send(new GetTeamManagementByManagerIdQuery(managerId)));
     }
 
-    public async Task<ReturnTeamManagementByManagerIdDTO> GetTeamManagementByManagerId(Guid managerId)
+    public async Task<IEnumerable<ReturnTeamManagementByManagerIdDTO>> GetTeamManagementByManagerId(Guid managerId)
     {
-        return _mapper.Map<ReturnTeamManagementByManagerIdDTO>(
+        return _mapper.Map<IEnumerable<ReturnTeamManagementByManagerIdDTO>>(
             await _mediator.Send(new GetTeamManagementByManagerIdQuery(managerId)));
     }
 }

@@ -16,6 +16,6 @@ public class ValidateTerm : IValidateTerm
         var scheduleEvent = await _service.GetScheduleEventByDateAsync(date);
 
         if (scheduleEvent.Atypical) return new TimeSpan(0, 12, 0, 0);
-        return new TimeSpan(2, 0, 0, 0);
+        return new TimeSpan(1, 0, 0, 0);
     }
 }

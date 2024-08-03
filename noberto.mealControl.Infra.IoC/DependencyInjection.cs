@@ -27,6 +27,7 @@ using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Mappings;
 using noberto.mealControl.Application.Services;
 using noberto.mealControl.Application.Utils.CalculationForReport;
+using noberto.mealControl.Application.Utils.CalculationForReport.Impl;
 using noberto.mealControl.Application.Utils.Validations.ValidateDay;
 using noberto.mealControl.Application.Utils.Validations.ValidateDay.Impl;
 using noberto.mealControl.Application.Utils.Validations.ValidateMeals;
@@ -76,6 +77,7 @@ public static class DependencyInjection
         services.AddScoped<IScheduleEventService, ScheduleEventServiceImpl>();
         services.AddScoped<IScheduleLocalEventService, ScheduleLocalEventServiceImpl>();
         services.AddScoped<IMealService, MealServiceImpl>();
+        services.AddScoped<IReportService, ReportServiceImpl>();
         services.AddHostedService<WorkService>();
 
 
@@ -105,10 +107,10 @@ public static class DependencyInjection
         services.AddTransient<IValidateDayAndHours, ValidateDayAndHoursImpl>();
         
         services.AddScoped<IValidateTerm, ValidateTerm>();
-        services.AddScoped<IValidateMeals<UpdateMealCoffeeDTO>, Coffe>();
-        services.AddScoped<IValidateMeals<UpdateMealLunchDTO>, Lunch>();
-        services.AddScoped<IValidateMeals<UpdateMealDinnerDTO>, Dinner>();
-        services.AddScoped<Calculation>();
+        services.AddScoped<IValidateMeals<UpdateMealCoffeeDTO, ReturnCoffesDTO>, Coffe>();
+        services.AddScoped<IValidateMeals<UpdateMealLunchDTO, ReturnLunchesDTO>, Lunch>();
+        services.AddScoped<IValidateMeals<UpdateMealDinnerDTO, ReturnDinnersDTO>, Dinner>();
+        services.AddScoped<ICalculation, Calculation>();
 
         return services;
     }

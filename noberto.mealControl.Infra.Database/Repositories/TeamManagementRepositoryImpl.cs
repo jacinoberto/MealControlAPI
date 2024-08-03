@@ -46,7 +46,8 @@ public class TeamManagementRepositoryImpl : ITeamManagementRepository
     {
         return await _context.TeamManagement
             .Where(teamManagement => teamManagement.ManagerId == managerId
-            && teamManagement.ActiveTeam == true)
+            && teamManagement.ActiveTeam == true).
+            Include(teamManagement => teamManagement.Manager)
             .ToListAsync();
     }
 

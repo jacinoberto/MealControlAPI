@@ -13,7 +13,7 @@ public interface IMealService
     Task<IEnumerable<ReturnLunchesDTO>> GetLunchesByManagerIdAndDate(Guid managerId, DateOnly date);
     Task<IEnumerable<ReturnDinnersDTO>> GetDinnersByManagerIdAndDate(Guid managerId, DateOnly date);
     Task UpdateMealsAsync(IEnumerable<UpdateMealDTO> mealsDto);
-    Task UpdateMealCoffeeAsync(UpdateMealCoffeeDTO coffee);
-    Task UpdateMealLunchAsync(UpdateMealLunchDTO lunch);
-    Task UpdateMealDinnerAsync(UpdateMealDinnerDTO dinner);
+    Task<IEnumerable<ReturnCoffesDTO>> UpdateMealCoffeeAsync(UpdateMealCoffeeDTO coffee);
+    Task<IEnumerable<ReturnLunchesDTO>> UpdateMealLunchAsync(UpdateMealLunchDTO lunch);
+    Task<IEnumerable<ReturnDinnersDTO>> UpdateMealDinnerAsync(UpdateMealDinnerDTO dinner);
 }

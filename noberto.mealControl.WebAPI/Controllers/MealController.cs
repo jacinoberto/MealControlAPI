@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using noberto.mealControl.Application.DTOs.MealDTO;
 using noberto.mealControl.Application.Interfaces;
-using noberto.mealControl.Application.Utils.CalculationForReport;
 
 namespace noberto.mealControl.WebAPI.Controllers;
 
@@ -10,12 +9,10 @@ namespace noberto.mealControl.WebAPI.Controllers;
 public class MealController : ControllerBase
 {
     private readonly IMealService _service;
-    private readonly Calculation c;
 
-    public MealController(IMealService service, Calculation c)
+    public MealController(IMealService service)
     {
         _service = service;
-        this.c = c;
     }
 
     /// <summary>
@@ -75,8 +72,8 @@ public class MealController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateCoffee([FromBody] UpdateMealCoffeeDTO coffeeDto)
     {
-        await _service.UpdateMealCoffeeAsync(coffeeDto);
-        return Ok();
+        var coffee = await _service.UpdateMealCoffeeAsync(coffeeDto);
+        return Ok(coffee);
     }
 
     /// <summary>
@@ -89,8 +86,8 @@ public class MealController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateLunch([FromBody] UpdateMealLunchDTO lunchDto)
     {
-        await _service.UpdateMealLunchAsync(lunchDto);
-        return Ok();
+        var lunch = await _service.UpdateMealLunchAsync(lunchDto);
+        return Ok(lunch);
     }
 
     /// <summary>
@@ -103,14 +100,7 @@ public class MealController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateDinner([FromBody] UpdateMealDinnerDTO dinnerDto)
     {
-        await _service.UpdateMealDinnerAsync(dinnerDto);
-        return Ok();
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> teste([FromQuery] DateOnly satart, DateOnly closing, Guid id)
-    {
-        await c.Execute(satart, closing, id);
-        return Ok();
+        var dinner = await _service.UpdateMealDinnerAsync(dinnerDto);
+        return Ok(dinner);
     }
 }

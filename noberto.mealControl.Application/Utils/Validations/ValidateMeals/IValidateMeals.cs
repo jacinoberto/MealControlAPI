@@ -1,6 +1,6 @@
 ﻿namespace noberto.mealControl.Application.Utils.Validations.ValidateMeals;
 
-public interface IValidateMeals<T>
+public interface IValidateMeals<TUpdate, TReturn>
 {
-    Task Validate(T t);
+    Task<IEnumerable<TReturn>> Validate(TUpdate t);
 }
