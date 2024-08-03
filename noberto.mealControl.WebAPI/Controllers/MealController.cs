@@ -63,16 +63,46 @@ public class MealController : ControllerBase
     }
 
     /// <summary>
-    /// Atualiza as refeições.
+    /// Atualiza o estado do cafés
     /// </summary>
-    /// <param name="mealsDto"></param>
+    /// <param name="coffeeDto"></param>
     /// <returns>IActionResult</returns>
-    /// <returns code=""200>Caso as refeições sejam atualizadas com sucesso.</returns>
-    [HttpPut]
+    /// <returns code="200">Caso a atualização ocorra sem problemas.</returns>
+    [HttpPut("update-coffee")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> UpdateMealsAsync([FromBody] IEnumerable<UpdateMealDTO> mealsDto)
+    public async Task<IActionResult> UpdateCoffee([FromBody] UpdateMealCoffeeDTO coffeeDto)
     {
-        await _service.UpdateMealsAsync(mealsDto);
+        await _service.UpdateMealCoffeeAsync(coffeeDto);
+        return Ok();
+    }
+
+    /// <summary>
+    /// Atualiza o estado do almoço
+    /// </summary>
+    /// <param name="lunchDto"></param>
+    /// <returns>IActionResult</returns>
+    /// <returns code="200">Caso a atualização ocorra sem problemas.</returns>
+    [HttpPut("update-coffee")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [HttpPut("update-lunch")]
+    public async Task<IActionResult> UpdateLunch([FromBody] UpdateMealLunchDTO lunchDto)
+    {
+        await _service.UpdateMealLunchAsync(lunchDto);
+        return Ok();
+    }
+
+    /// <summary>
+    /// Atualiza o estado da janta
+    /// </summary>
+    /// <param name="dinnerDto"></param>
+    /// <returns>IActionResult</returns>
+    /// <returns code="200">Caso a atualização ocorra sem problemas.</returns>
+    [HttpPut("update-coffee")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [HttpPut("update-dinner")]
+    public async Task<IActionResult> UpdateDinner([FromBody] UpdateMealDinnerDTO dinnerDto)
+    {
+        await _service.UpdateMealDinnerAsync(dinnerDto);
         return Ok();
     }
 }

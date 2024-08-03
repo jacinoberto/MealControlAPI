@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using noberto.mealControl.Application.Background.Services.OpenCalendar;
 using noberto.mealControl.Application.Background.Services.OpenCalendar.Impl;
-using noberto.mealControl.Application.Background.Services.RegisterMealDate;
 using noberto.mealControl.Application.Background.Services.RegisterMealDate.Impl;
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateDayAndHours;
 

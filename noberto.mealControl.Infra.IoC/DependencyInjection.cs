@@ -22,9 +22,14 @@ using noberto.mealControl.Application.Background.Utils.Validations.ValidateWeeke
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateWeekend.Impl;
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling;
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
+using noberto.mealControl.Application.DTOs.MealDTO;
 using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Mappings;
 using noberto.mealControl.Application.Services;
+using noberto.mealControl.Application.Utils.Validations.ValidateDay;
+using noberto.mealControl.Application.Utils.Validations.ValidateDay.Impl;
+using noberto.mealControl.Application.Utils.Validations.ValidateMeals;
+using noberto.mealControl.Application.Utils.Validations.ValidateMeals.Impl;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Repositories;
 using noberto.mealControl.Infra.Database.Context;
@@ -97,6 +102,11 @@ public static class DependencyInjection
         services.AddScoped<IValidateStrategy<TeamManagement>, DuplicateTeamManagementSectorError>();
         services.AddScoped<IValidateStrategy<TeamManagement>, DuplicateTeamManagementWorkError>();
         services.AddTransient<IValidateDayAndHours, ValidateDayAndHoursImpl>();
+        
+        services.AddScoped<IValidateTerm, ValidateTerm>();
+        services.AddScoped<IValidateMeals<UpdateMealCoffeeDTO>, Coffe>();
+        services.AddScoped<IValidateMeals<UpdateMealLunchDTO>, Lunch>();
+        services.AddScoped<IValidateMeals<UpdateMealDinnerDTO>, Dinner>();
 
         return services;
     }

@@ -48,15 +48,29 @@ public class Meal : Identifier
     }
 
     /// <summary>
-    /// Atualizar Refeições
+    /// Atualizar café
     /// </summary>
-    /// <param name="coffe"></param>
-    /// <param name="lunch"></param>
-    /// <param name="dinner"></param>
-    public void UpdateMeal(bool coffe, bool lunch, bool dinner)
+    /// <param name="coffee"></param>
+    public void UpdateCoffee(bool coffee)
     {
-        Coffe = coffe;
+        Coffe = coffee;
+    }
+
+    /// <summary>
+    /// Atualizar almoço
+    /// </summary>
+    /// <param name="lunch"></param>
+    public void UpdateLunch(bool lunch)
+    {
         Lunch = lunch;
+    }
+
+    /// <summary>
+    /// Atualizar jantar
+    /// </summary>
+    /// <param name="dinner"></param>
+    public void UpdateDinner(bool dinner)
+    {
         Dinner = dinner;
     }
 }

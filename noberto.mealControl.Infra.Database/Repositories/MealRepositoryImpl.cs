@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using noberto.mealControl.Application.Utils.Validations.ValidateMeals.Impl;
 using noberto.mealControl.Core.Entities;
 using noberto.mealControl.Core.Enums.Impl;
 using noberto.mealControl.Core.Exceptions;
@@ -23,6 +24,13 @@ public class MealRepositoryImpl : IMealRepository
         return meal;
     }
 
+    public async Task<IEnumerable<Meal>> GetMealByDate(DateOnly date)
+    {
+        return await _context.Meals
+            .Where(meal => meal.ScheduleLocalEvent.ScheduleEvent.MealDate == date)
+            .ToListAsync();
+    }
+
     public async Task<Meal> GetMealByIdAsync(Guid mealId)
     {
         return await _context.Meals.FindAsync(mealId)
@@ -41,10 +49,40 @@ public class MealRepositoryImpl : IMealRepository
                 .MealNotFoundByManagerIdAndDate.ToString());
     }
 
+    public async Task<Meal> UpdateMealCoffeeAsync(Guid id, bool coffee)
+    {
+        var meal = await _context.Meals.FindAsync(id);
+
+        meal.UpdateCoffee(coffee);
+        await _context.SaveChangesAsync();
+
+        return meal;
+    }
+
+    public async Task<Meal> UpdateMealDinnerAsync(Guid id, bool dinner)
+    {
+        var meal = await _context.Meals.FindAsync(id);
+
+        meal.UpdateDinner(dinner);
+        await _context.SaveChangesAsync();
+
+        return meal;
+    }
+
+    public async Task<Meal> UpdateMealLunchAsync(Guid id, bool lunch)
+    {
+        var meal = await _context.Meals.FindAsync(id);
+
+        meal.UpdateLunch(lunch);
+        await _context.SaveChangesAsync();
+
+        return meal;
+    }
+
     public async Task<Meal> UpdateMealsAsync(Meal meal)
     {
         var mealEntity = await _context.Meals.FindAsync(meal.Id);
-        mealEntity.UpdateMeal(meal.Coffe, meal.Lunch, meal.Dinner);
+        //mealEntity.UpdateMeal(meal.Coffe, meal.Lunch, meal.Dinner);
         await _context.SaveChangesAsync();
 
         return meal;
