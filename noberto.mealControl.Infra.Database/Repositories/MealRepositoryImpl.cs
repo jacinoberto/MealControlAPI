@@ -37,10 +37,10 @@ public class MealRepositoryImpl : IMealRepository
             ?? throw new EntityNotFoundException(TypesNotFoundEnum.MealNotFoundById.ToString());
     }
 
-    public async Task<IEnumerable<Meal>> GetMealsByIdManagerAndDateAsync(Guid managerId, DateOnly date)
+    public async Task<IEnumerable<Meal>> GetMealsByTeamManagementIdAndDateAsync(Guid teamManagementId, DateOnly date)
     {
         var meals = await _context.Meals
-            .Where(meal => meal.Team.TeamManagement.ManagerId == managerId
+            .Where(meal => meal.Team.TeamManagementId == teamManagementId
             && meal.ScheduleLocalEvent.ScheduleEvent.MealDate == date)
             .Include(meal => meal.Team.Worker)
             .ToListAsync();
@@ -48,6 +48,15 @@ public class MealRepositoryImpl : IMealRepository
         return meals.Count is not 0 ? meals
             : throw new EntityNotFoundException(TypesNotFoundEnum
                 .MealNotFoundByManagerIdAndDate.ToString());
+    }
+
+    public async Task<IEnumerable<Meal>> GetMealsByStartDateAndClosingDateAndManagerIdAsync(DateOnly startDate, DateOnly closingDate, Guid managerId)
+    {
+        return await _context.Meals
+            .Where(meal => meal.ScheduleLocalEvent.ScheduleEvent.MealDate >= startDate
+            && meal.ScheduleLocalEvent.ScheduleEvent.MealDate <= closingDate
+            && meal.Team.TeamManagement.ManagerId == managerId)
+            .ToListAsync();
     }
 
     public async Task<Meal> UpdateMealCoffeeAsync(Guid id, bool coffee)

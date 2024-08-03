@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using noberto.mealControl.Application.DTOs.MealDTO;
 using noberto.mealControl.Application.Interfaces;
+using noberto.mealControl.Application.Utils.CalculationForReport;
 
 namespace noberto.mealControl.WebAPI.Controllers;
 
@@ -9,10 +10,12 @@ namespace noberto.mealControl.WebAPI.Controllers;
 public class MealController : ControllerBase
 {
     private readonly IMealService _service;
+    private readonly Calculation c;
 
-    public MealController(IMealService service)
+    public MealController(IMealService service, Calculation c)
     {
         _service = service;
+        this.c = c;
     }
 
     /// <summary>
@@ -26,9 +29,9 @@ public class MealController : ControllerBase
     [HttpGet("coffee")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetCoffesByManagerIdAndDate(Guid managerId, [FromQuery] DateOnly date)
+    public async Task<IActionResult> GetCoffesByManagerIdAndDate(Guid teamManagementId, [FromQuery] DateOnly date)
     {
-        return Ok(await _service.GetCoffesByManagerIdAndDate(managerId, date));
+        return Ok(await _service.GetCoffesByManagerIdAndDate(teamManagementId, date));
     }
     /// <summary>
     /// Retorna uma lista de almoços das Equipes de um determinado Encarregado.
@@ -41,9 +44,9 @@ public class MealController : ControllerBase
     [HttpGet("lunch")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetLunchesByManagerIdAndDate([FromQuery] DateOnly date, Guid managerId)
+    public async Task<IActionResult> GetLunchesByManagerIdAndDate(Guid teamManagementId, [FromQuery] DateOnly date)
     {
-        return Ok(await _service.GetLunchesByManagerIdAndDate(managerId, date));
+        return Ok(await _service.GetLunchesByManagerIdAndDate(teamManagementId, date));
     }
 
     /// <summary>
@@ -57,9 +60,9 @@ public class MealController : ControllerBase
     [HttpGet("dinner")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetDinnersByManagerIdAndDate(Guid managerId, [FromQuery] DateOnly date)
+    public async Task<IActionResult> GetDinnersByManagerIdAndDate(Guid teamManagementId, [FromQuery] DateOnly date)
     {
-        return Ok(await _service.GetDinnersByManagerIdAndDate(managerId, date));
+        return Ok(await _service.GetDinnersByManagerIdAndDate(teamManagementId, date));
     }
 
     /// <summary>
@@ -101,6 +104,13 @@ public class MealController : ControllerBase
     public async Task<IActionResult> UpdateDinner([FromBody] UpdateMealDinnerDTO dinnerDto)
     {
         await _service.UpdateMealDinnerAsync(dinnerDto);
+        return Ok();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> teste([FromQuery] DateOnly satart, DateOnly closing, Guid id)
+    {
+        await c.Execute(satart, closing, id);
         return Ok();
     }
 }

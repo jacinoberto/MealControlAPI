@@ -4,12 +4,12 @@ public record ReportDTO(
     string Manager,
     string Sector,
     int Coffee,
-    decimal CostOfCoffee,
+    double CostOfCoffee,
     int Lunch,
-    decimal CostOfLunch,
+    double CostOfLunch,
     int Dinner,
-    decimal CostOfDinner,
+    double CostOfDinner,
     int TotalTeam,
     int TotalMeals,
-    decimal TotalValue
+    double TotalValue
     );

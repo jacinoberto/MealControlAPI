@@ -5,6 +5,7 @@ using noberto.mealControl.Application.CQRS.MealCQRS.Queries;
 using noberto.mealControl.Application.DTOs.MealDTO;
 using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Utils.Validations.ValidateMeals;
+using noberto.mealControl.Core.Entities;
 
 namespace noberto.mealControl.Application.Services;
 
@@ -32,22 +33,22 @@ public class MealServiceImpl : IMealService
         await _mediator.Send(createMeal);
     }
 
-    public async Task<IEnumerable<ReturnCoffesDTO>> GetCoffesByManagerIdAndDate(Guid managerId, DateOnly date)
+    public async Task<IEnumerable<ReturnCoffesDTO>> GetCoffesByManagerIdAndDate(Guid teamManagementId, DateOnly date)
     {
         return _mapper.Map<IEnumerable<ReturnCoffesDTO>>(
-            await _mediator.Send(new GetMealsByManagerIdAndDateQuery(managerId, date)));
+            await _mediator.Send(new GetMealsByTeamManagementIdAndDateQuery(teamManagementId, date)));
     }
 
-    public async Task<IEnumerable<ReturnDinnersDTO>> GetDinnersByManagerIdAndDate(Guid managerId, DateOnly date)
+    public async Task<IEnumerable<ReturnDinnersDTO>> GetDinnersByManagerIdAndDate(Guid teamManagementId, DateOnly date)
     {
         return _mapper.Map<IEnumerable<ReturnDinnersDTO>>(
-            await _mediator.Send(new GetMealsByManagerIdAndDateQuery(managerId, date)));
+            await _mediator.Send(new GetMealsByTeamManagementIdAndDateQuery(teamManagementId, date)));
     }
 
-    public async Task<IEnumerable<ReturnLunchesDTO>> GetLunchesByManagerIdAndDate(Guid managerId, DateOnly date)
+    public async Task<IEnumerable<ReturnLunchesDTO>> GetLunchesByManagerIdAndDate(Guid teamManagementId, DateOnly date)
     {
         return _mapper.Map<IEnumerable<ReturnLunchesDTO>>(
-            await _mediator.Send(new GetMealsByManagerIdAndDateQuery(managerId, date)));
+            await _mediator.Send(new GetMealsByTeamManagementIdAndDateQuery(teamManagementId, date)));
     }
 
     public async Task<IEnumerable<ReturnCoffesDTO>> GetMealCoffeesByDateAsync(DateOnly date)
