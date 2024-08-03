@@ -142,12 +142,18 @@ public class DomainToDtoProfile : Profile
             .ReverseMap();
 
         CreateMap<Meal, ReturnCoffesDTO>()
+            .ForMember(mealDto => mealDto.Team,
+            option => option.MapFrom(meal => meal.Team))
             .ReverseMap();
 
         CreateMap<Meal, ReturnDinnersDTO>()
+            .ForMember(mealDto => mealDto.Team,
+            option => option.MapFrom(meal => meal.Team))
             .ReverseMap();
 
         CreateMap<Meal, ReturnLunchesDTO>()
+            .ForMember(mealDto => mealDto.Team,
+            option => option.MapFrom(meal => meal.Team))
             .ReverseMap();
 
         CreateMap<Meal, MealReturnForUpdate>()

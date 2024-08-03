@@ -5,7 +5,7 @@ namespace noberto.mealControl.Core.Entities;
 
 public class Meal : Identifier
 {
-    public bool Coffe { get; private set; }
+    public bool Coffee { get; private set; }
     public bool Lunch { get; private set; }
     public bool Dinner { get; private set; }
 
@@ -20,20 +20,20 @@ public class Meal : Identifier
     {
         
     }
-    public Meal(bool coffe, bool lunch, bool dinner)
+    public Meal(bool coffee, bool lunch, bool dinner)
     {
-        ValidateMealData(coffe, lunch, dinner);
+        ValidateMealData(coffee, lunch, dinner);
     }
 
     /// <summary>
     /// Validar dados informados para instanciar uma nova Refeição
     /// </summary>
-    /// <param name="coffe"></param>
+    /// <param name="coffee"></param>
     /// <param name="lunch"></param>
     /// <param name="dinner"></param>
-    private void ValidateMealData(bool coffe, bool lunch, bool dinner)
+    private void ValidateMealData(bool coffee, bool lunch, bool dinner)
     {
-        InvalidEntityDataException.When(coffe == null,
+        InvalidEntityDataException.When(coffee == null,
             BadInternalOrdersEnum.CoffeIsNull.ToString());
 
         InvalidEntityDataException.When(lunch == null,
@@ -42,7 +42,7 @@ public class Meal : Identifier
         InvalidEntityDataException.When(dinner == null,
             BadInternalOrdersEnum.DinnerIsNull.ToString());
 
-        Coffe = coffe;
+        Coffee = coffee;
         Lunch = lunch;
         Dinner = dinner;
     }
@@ -53,7 +53,7 @@ public class Meal : Identifier
     /// <param name="coffee"></param>
     public void UpdateCoffee(bool coffee)
     {
-        Coffe = coffee;
+        Coffee = coffee;
     }
 
     /// <summary>

@@ -42,6 +42,7 @@ public class MealRepositoryImpl : IMealRepository
         var meals = await _context.Meals
             .Where(meal => meal.Team.TeamManagement.ManagerId == managerId
             && meal.ScheduleLocalEvent.ScheduleEvent.MealDate == date)
+            .Include(meal => meal.Team.Worker)
             .ToListAsync();
 
         return meals.Count is not 0 ? meals

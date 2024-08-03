@@ -21,7 +21,7 @@ public class MealConfiguration : IEntityTypeConfiguration<Meal>
         builder.Property(meal => meal.Id)
             .HasColumnName("id_meal");
 
-        builder.Property(meal => meal.Coffe)
+        builder.Property(meal => meal.Coffee)
             .HasColumnName("coffe")
             .IsRequired();
 

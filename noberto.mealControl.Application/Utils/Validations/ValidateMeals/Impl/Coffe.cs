@@ -28,7 +28,7 @@ public class Coffe : IValidateMeals<UpdateMealCoffeeDTO>
         {
             foreach (var coffee in coffees)
             {
-                if (coffeeUpdate.Coffee != coffee.Coffe)
+                if (coffeeUpdate.Coffee != coffee.Coffee)
                 {
                     TimeSpan time = coffeesDto.MealDate.ToDateTime(new TimeOnly(7,0,0)) - DateTime.UtcNow;
 

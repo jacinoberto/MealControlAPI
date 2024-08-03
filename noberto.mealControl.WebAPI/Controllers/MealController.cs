@@ -23,7 +23,7 @@ public class MealController : ControllerBase
     /// <returns>IActionResult</returns>
     /// <returns code="200">Caso sejam encontrados cafés compativeis com o ID informado do Encarregado.</returns>
     /// <returns code="404">Caso não sejam encontrados cafés compativeis com o ID informado do Encarregado.</returns>
-    [HttpGet("coffe")]
+    [HttpGet("coffee")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetCoffesByManagerIdAndDate(Guid managerId, [FromQuery] DateOnly date)
@@ -82,9 +82,8 @@ public class MealController : ControllerBase
     /// <param name="lunchDto"></param>
     /// <returns>IActionResult</returns>
     /// <returns code="200">Caso a atualização ocorra sem problemas.</returns>
-    [HttpPut("update-coffee")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpPut("update-lunch")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateLunch([FromBody] UpdateMealLunchDTO lunchDto)
     {
         await _service.UpdateMealLunchAsync(lunchDto);
@@ -97,9 +96,8 @@ public class MealController : ControllerBase
     /// <param name="dinnerDto"></param>
     /// <returns>IActionResult</returns>
     /// <returns code="200">Caso a atualização ocorra sem problemas.</returns>
-    [HttpPut("update-coffee")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     [HttpPut("update-dinner")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> UpdateDinner([FromBody] UpdateMealDinnerDTO dinnerDto)
     {
         await _service.UpdateMealDinnerAsync(dinnerDto);
