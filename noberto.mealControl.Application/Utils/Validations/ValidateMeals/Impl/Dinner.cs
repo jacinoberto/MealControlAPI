@@ -38,7 +38,7 @@ public class Dinner : IValidateMeals<UpdateMealDinnerDTO, ReturnDinnersDTO>
                     if (time >= term)
                     {
                         dinnerList.Add(_mapper.Map<ReturnDinnersDTO>(
-                            await _mediator.Send(new UpdateMealLunchCommand(
+                            await _mediator.Send(new UpdateMealDinnerCommand(
                                 dinnerUpdate.Id, dinnerUpdate.Dinner))));
                     }
                 }

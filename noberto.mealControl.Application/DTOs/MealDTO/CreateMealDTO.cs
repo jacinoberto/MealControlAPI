@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace noberto.mealControl.Application.DTOs.MealDTO;
+﻿namespace noberto.mealControl.Application.DTOs.MealDTO;
 
 public record struct CreateMealDTO(
     bool Coffe,

@@ -31,9 +31,9 @@ public class RegisterMealDateImpl : IRegisterMealDate
 
     public async Task Register()
     {
-        DateOnly day = DateOnly.FromDateTime(DateTime.Today).AddDays(3);
+        DateOnly day = DateOnly.FromDateTime(DateTime.Today).AddDays(0);
 
-        if (DateTime.Today.DayOfWeek == DayOfWeek.Thursday)
+        if (DateTime.Today.DayOfWeek == DayOfWeek.Monday)
         {
             for (int i = 1; i <= 7; i++)
             {

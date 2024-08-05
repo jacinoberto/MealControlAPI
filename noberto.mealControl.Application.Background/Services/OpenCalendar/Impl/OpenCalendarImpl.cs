@@ -18,7 +18,7 @@ public class OpenCalendarImpl : IOpenCalendar
 
     public async Task Open()
     {
-        if (DateTime.Today.DayOfWeek == DayOfWeek.Thursday)
+        if (DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
         {
             var scheduleLocalEvents = await _scheduleLocalEventService.GetScheduleLocalEventByDay();
 

@@ -35,4 +35,12 @@ public class ScheduleEventController : ControllerBase
         await _service.CreateScheduleEventAsync(scheduleEventDTO);
         return StatusCode(201);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> teste()
+    {
+        await registerMealDate.Register();
+        await openCalendar.Open();
+        return StatusCode(201);
+    }
 }
