@@ -23,7 +23,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 {
-    policy.WithOrigins();
+    policy.WithOrigins("https://fortes-meal-management.web.app/");
     policy.AllowAnyMethod();
     policy.AllowAnyHeader();
     policy.AllowCredentials();
