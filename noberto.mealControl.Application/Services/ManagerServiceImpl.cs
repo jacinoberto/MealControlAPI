@@ -56,4 +56,10 @@ public class ManagerServiceImpl : IManagerService
         return _mapper.Map<ReturnManagerLoginDTO>(
             await _mediator.Send(new GetManagerByEmailAndPasswordQuery(loginManager.email, loginManager.password)));
     }
+
+    public async Task<IEnumerable<ReturnManagerLoginDTO>> GetAllManageAsync()
+    {
+        return _mapper.Map<IEnumerable<ReturnManagerLoginDTO>>(
+            await _mediator.Send(new GetAllManagersQuery()));
+    }
 }

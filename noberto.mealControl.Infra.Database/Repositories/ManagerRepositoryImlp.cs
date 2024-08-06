@@ -32,6 +32,13 @@ public class ManagerRepositoryImlp : IManagerRepository
         return manager;
     }
 
+    public async Task<IEnumerable<Manager>> GetAllManagersAsync()
+    {
+        return await _context.Managers
+            .Where(manager => manager.User.ActiveProfile == true)
+            .ToListAsync();
+    }
+
     public async Task<Manager> GetManagerByEmailAndPassword(string email, string password)
     {
         return await _context.Managers

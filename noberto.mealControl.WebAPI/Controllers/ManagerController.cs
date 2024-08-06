@@ -34,6 +34,18 @@ public class ManagerController : ControllerBase
     }
 
     /// <summary>
+    /// Retorna uma lista de Encarregados ativos.
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="200">Caso sejam encontrados Encarregados ativos no sistema.</response>
+    [HttpGet("all")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAllManageAsync()
+    {
+        return Ok(await _service.GetAllManageAsync());
+    }
+
+    /// <summary>
     /// Retorna uma lista de Encarregados pela Matricula, Nome ou E-mail.
     /// </summary>
     /// <param name="registrationOrNameOrEmail"></param>
