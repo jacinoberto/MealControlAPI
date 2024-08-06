@@ -26,8 +26,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
     policy.WithOrigins("https://fortes-meal-management.web.app");
     policy.AllowAnyMethod();
     policy.AllowAnyHeader();
-    policy.AllowCredentials();
-    policy.SetIsOriginAllowed(_ => true);
+    //policy.AllowCredentials();
+   // policy.SetIsOriginAllowed(_ => true);
 }));
 
 var app = builder.Build();
