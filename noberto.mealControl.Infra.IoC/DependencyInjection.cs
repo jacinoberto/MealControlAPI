@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using noberto.mealControl.Application.Background.Services.Background;
 using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingDateToWork;
 using noberto.mealControl.Application.Background.Services.MealDate.PendingWork.AssingDateToWork.Impl;
@@ -23,6 +24,7 @@ using noberto.mealControl.Application.Background.Utils.Validations.ValidateWeeke
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling;
 using noberto.mealControl.Application.Background.Utils.Validations.ValidateWorkOnLocalEventScheduling.Impl;
 using noberto.mealControl.Application.DTOs.MealDTO;
+using noberto.mealControl.Application.Handler;
 using noberto.mealControl.Application.Interfaces;
 using noberto.mealControl.Application.Mappings;
 using noberto.mealControl.Application.Services;
@@ -30,6 +32,8 @@ using noberto.mealControl.Application.Utils.CalculationForReport;
 using noberto.mealControl.Application.Utils.CalculationForReport.Impl;
 using noberto.mealControl.Application.Utils.Validations.ValidateDay;
 using noberto.mealControl.Application.Utils.Validations.ValidateDay.Impl;
+using noberto.mealControl.Application.Utils.Validations.ValidateInternalErrors;
+using noberto.mealControl.Application.Utils.Validations.ValidateInternalErrors.Impl;
 using noberto.mealControl.Application.Utils.Validations.ValidateMeals;
 using noberto.mealControl.Application.Utils.Validations.ValidateMeals.Impl;
 using noberto.mealControl.Core.Entities;
@@ -111,6 +115,12 @@ public static class DependencyInjection
         services.AddScoped<IValidateMeals<UpdateMealLunchDTO, ReturnLunchesDTO>, Lunch>();
         services.AddScoped<IValidateMeals<UpdateMealDinnerDTO, ReturnDinnersDTO>, Dinner>();
         services.AddScoped<ICalculation, Calculation>();
+        
+        services.AddSingleton<InternalError>();
+        services.AddSingleton<IValidateError, ValidateDuplicateDataError>();
+        services.AddSingleton<IValidateError, ValidateInvalidEntityDataError>();
+        services.AddSingleton<IValidateError, ValidateNotFoundError>();
+        services.AddSingleton<IValidateError, ValidateServerError>();
 
         return services;
     }

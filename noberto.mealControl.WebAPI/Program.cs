@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using noberto.mealControl.Application.Handler;
 using noberto.mealControl.Infra.IoC;
 using System.Reflection;
 
@@ -37,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
 app.UseCors();
 
