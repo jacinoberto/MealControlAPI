@@ -23,11 +23,11 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 {
-    policy.WithOrigins("https://fortes-meal-management.web.app");
+    policy.WithOrigins();
     policy.AllowAnyMethod();
     policy.AllowAnyHeader();
-    //policy.AllowCredentials();
-   // policy.SetIsOriginAllowed(_ => true);
+    policy.AllowCredentials();
+    policy.SetIsOriginAllowed(_ => true);
 }));
 
 var app = builder.Build();
@@ -39,9 +39,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
-
 app.UseCors();
+
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
 app.UseHttpsRedirection();
 
