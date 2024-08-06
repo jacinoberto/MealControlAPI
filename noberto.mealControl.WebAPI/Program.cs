@@ -6,6 +6,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,17 +21,14 @@ builder.Services.AddSwaggerGen(swagger =>
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// Configure CORS
-builder.Services.AddCors(options =>
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 {
-    options.AddPolicy("AllowSpecificOrigin", policy =>
-    {
-        policy.WithOrigins("https://fortes-meal-management.web.app")
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
-    });
-});
+    policy.WithOrigins();
+    policy.AllowAnyMethod();
+    policy.AllowAnyHeader();
+    policy.AllowCredentials();
+    policy.SetIsOriginAllowed(_ => true);
+}));
 
 var app = builder.Build();
 
@@ -41,10 +39,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
-
-// Use CORS
 app.UseCors();
+
+app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
 app.UseHttpsRedirection();
 
